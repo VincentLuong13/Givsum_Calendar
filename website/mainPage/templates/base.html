@@ -1,0 +1,69 @@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Helvetica;
+            background-color: #fefefe;
+        }
+        .box {
+            width: 21%;
+            height: 26%;
+            margin: 2% 1%;
+            background-color:coral;
+            position: fixed;
+        }
+        .filters {
+            width: 21%;
+            margin: 16% 1%;
+            position: fixed;
+        }
+        
+    </style>
+    {% block head %}
+    {% endblock %}
+</head>
+        
+<body>
+    <!-- nav bar start -->
+    <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <a href="/"><img src="http://i64.tinypic.com/dcvji9.png" height="35px"></a>
+            <ul class="navbar-nav ml-auto">
+                <button type="button" class="btn btn-outline-light" style="font-weight: bold;">CALENDAR</button> <!-- calendar view button -->
+                &nbsp;
+                <button type="button" class="btn btn-outline-light" style="font-weight: bold;">SCHEDULE</button> <!-- schedule view button -->
+            </ul>
+        </div>
+    </nav>
+    <!-- nav bar end -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 border-right" style="background-color: #f2f2f2;"  >
+                <!-- left column content goes here -->
+                <div class="box"><center><B><font color="white">calendar</font></B></center></div>
+                <div class="btn-group btn-group-toggle btn-group-vertical filters" data-toggle="buttons">
+                    <label class="btn btn-light active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                    </label>
+                    <label class="btn btn-light">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                    </label>
+                    <label class="btn btn-light">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                    </label>
+                    </div>
+            </div>
+            <div class="col-9">
+                <!-- right column content goes here -->
+                {% block right %}
+                {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+        
