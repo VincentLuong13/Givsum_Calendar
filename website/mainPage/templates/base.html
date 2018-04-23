@@ -43,7 +43,7 @@
     <!-- nav bar end -->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 border-right" style="background-color: #f2f2f2;" >
+            <div class="col-3" style="background-color: #f7f7f7;" > <!-- make if statement here for h-100 -->
                 <!-- left column content goes here -->
                 <div class="box"><center><B><font color="white">calendar</font></B></center></div>
                 <div class="btn-group btn-group-toggle btn-group-vertical filters" data-toggle="buttons">
@@ -58,10 +58,11 @@
                     </label>
                     </div>
             </div>
-            <div class="col-9">
+            <div class="col-9 border-left" style="background-color: #fefefe;">
                 <!-- right column content goes here -->
                 {% block right %}
                 {% endblock %}
+            </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -2,14 +2,14 @@
 {% block head %}
     <style>
         ul {list-style-type: none;}
-        body {font-family: Verdana, sans-serif;}
+        body {font-family: Helvetica, sans-serif;}
 
         /* Month header */
         .month {
             padding: 20px 25px;
             margin: 1% 0% 0% 0%;
             width: 100%;
-            background: #1abc9c;
+            background: coral;
             text-align: right;
         }
 
@@ -53,24 +53,26 @@
 
         .weekdays li {
             display: inline-block;
-            width: 13.6%;
+            width: 13.3%;
             color: #666;
             text-align: center;
+            margin: 0px -24px 0px 24px;
         }
 
         /* Days (1-31) */
         .days {
-            padding: 10px 0;
+            padding: 10px 0px 0px 25px;
             background: #eee;
-            margin: 0;
+            margin: 0px;
         }
 
         .days li {
             list-style-type: none;
             display: inline-block;
+            padding: 5px 0px 5px 10px;
             width: 13.6%;
             height: 13.5%;
-            text-align: center;
+            text-align: left;
             margin-bottom: 5px;
             font-size:12px;
             color: #777;
@@ -82,11 +84,27 @@
             background: #1abc9c;
             color: white !important
         }
+        .dot {
+            height: 7px;
+            width: 7px;
+            border-radius: 50%;
+            display: inline-block;
+        }
     </style>
 {% endblock %}
 
 {% block right %}
-<div class="month"> 
+<div class="month">
+    <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle float-left" style="background-color: coral; border: coral; color: white;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        MONTH
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">WEEK</a>
+        <a class="dropdown-item active" href="#">MONTH</a>
+        <a class="dropdown-item" href="#">YEAR</a>
+    </div>
+    </div> 
     <ul>  
         <li class="next">&#10095;</li>
         <li class="prev">&#10094;</li>
@@ -108,7 +126,7 @@
   
   <ul class="days">
     {% for i in num_days %}   
-    <li>{{ forloop.counter }}</li>
+    <li>{{ forloop.counter }}<BR><span class="dot" style="background-color: coral;"></span> event name here !!</li>
     {% endfor %}
   </ul>
 

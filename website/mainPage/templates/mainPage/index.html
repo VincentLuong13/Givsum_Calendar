@@ -1,34 +1,172 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
+    .event {
+        background-color: #efefef;
+        padding: 20px 10px 10px 10px;
+        margin: 15px auto;
+        width: 100%;
+        border-radius: 10px;
+    }
+    .event-left {
+        width: 10%;
+    }
+    .event-right {
+        width: 80%;
+        margin-left: 190px;
+        margin-top: -185px;
+        margin-bottom: 20px;
+    }
+    #icon img {
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+        margin-left: 30px;
+        margin-bottom: 25px;
+    }
+    #time {
+        margin-left: 50px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+    #date {
+        font-size: 20px;
+        color: #323232;
+        text-transform: uppercase;
+        margin-bottom: -15px;
+    }
+    #event {
+        font-size: 40px;
+        font-weight: bold;
+        text-transform: uppercase;
+        overflow-wrap: break-word;
+        width: 100%;       
+    }
+    #event a {
+        color: #323232;
+        text-decoration: none;
+    }
+    #event a:hover {
+        color: coral;
+    }
+    #location {
+        font-size: 20px;
+        color: #323232;
+        text-transform: uppercase;
+        font-style: italic;
+        margin-top: -15px;
+    }
+    #location a {
+        color: #323232;
+        text-decoration: none;
+    }
+    #location a:hover {
+        color: #0f0f0f;
+    }
+    #description {
+        font-size: 12px;
+        width: 100%;
+        height: 70px;
+        margin-bottom: 20px;
+        color: #5a5a5a;
+        overflow: hidden;
+    }
+    .information {
+        position: relative;
+        margin: -2px 0px 0px 0px;
+    }
+    #date-marker {
+        background-color: #f2f2f2;
+        text-align: right;
+        padding: 10px 20px;
+        font-size: 35px;
+        position: sticky;
+        font-weight: bold;
+        text-transform: uppercase;
+        top: 54px;
+        z-index: 1;
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}
 
 {% block right %}
-    <h1>SCHEDULE</h1>
-    <p>Li Europan lingues es membres del sam familie. <strong>Lor separat existentie es un myth.</strong> Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. <em>Omnicos directe al desirabilite de un nov lingua franca:</em> On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu commun paroles.</p>
-    <h2>
-        Li Europan lingues<br />
-    </h2>
-    <p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es.</p>
-    <ul>
-    <li>Li Europan lingues
-        </li>
-    <li>es membres del sam familie.
-        </li>
-    </ul>
-    <h3>
-        Li Europan lingues<br />
-    </h3>
-    <ol>
-    <li>Lor separat existentie es un myth.
-        </li>
-    <li>Por scientie, musica, sport etc,
-        </li>
-    </ol>
-    <h4>
-        Li Europan lingues<br />
-    </h4>
-    <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu commun paroles.</p>
-    <p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es.</p>
-    <p></textarea></p><h2>Copy &amp; Paste Li Europan Lingues [Plain Text]</h2><p>If you&#8217;d rather use a copy of li Europan lingues that doesn&#8217;t include HTML markup such as for use in a Word document, WYSIWYG editor, or WordPress&#8217;s visual editor, you can use this version.</p><h1> Li Europan lingues<br /></h1><p>Li Europan lingues es membres del sam familie. <strong>Lor separat existentie es un myth.</strong> Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. <em>Omnicos directe al desirabilite de un nov lingua franca:</em> On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu commun paroles.</p><h2> Li Europan lingues<br /></h2><p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es.</p><ul><li>Li Europan lingues</li><li>es membres del sam familie.</li></ul><h3> Li Europan lingues<br /></h3><ol><li>Lor separat existentie es un myth.</li><li>Por scientie, musica, sport etc,</li></ol><h4> Li Europan lingues<br /></h4><p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu commun paroles.</p><p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es.</p><h3> The European Languages<br /></h3><p>An English translation of Li Europan Lingues is also popular filler text for designers who prefer readable greek copy.</p><h4> The European Languages HTML<br /></h4><p>Using filler text with HTML markup allows you to see how each HTML element is going to render. In this box you can see HTML ready for you to copy and paste into your HTML editor.</p><h1> The European languages<br /></h1><p>The European languages are members of the same family. <strong>Their separate existence is a myth.</strong> For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. <em>Everyone realizes why a new common language would be desirable:</em> one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words.</p><h2> The European languages<br /></h2><p>If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me that Occidental is.</p><ul><li>The European languages</li><li>are members of the same family.</li></ul><h3> The European languages<br /></h3><ol><li>Their separate existence is a myth.</li><li>For science, music, sport, etc,</li></ol><h4> The European languages<br /></h4><p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words.</p><p>If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me that Occidental is.</p><h4> The European Languages Text<br /></h4><p>If you&#8217;d rather use a copy of the European languages that doesn&#8217;t include HTML markup such as for a Word document, WYSIWYG editor, or WordPress&#8217;s visual editor, you can use this version.</p><h1> The European languages<br /></h1><p>The European languages are members of the same family. <strong>Their separate existence is a myth.</strong> For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. <em>Everyone realizes why a new common language would be desirable:</em> one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words.</p><h2> The European languages<br /></h2><p>If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me that Occidental is.</p><ul><li>The European languages</li><li>are members of the same family.</li></ul><h3> The European languages<br /></h3><ol><li>Their separate existence is a myth.</li><li>For science, music, sport, etc,</li></ol><h4> The European languages<br /></h4><p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators. To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words.</p><p>If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me that Occidental is.</p>
+<div id="date-marker">
+    DAY GOES HERE
+</div>
+
+<div class="event">
+    <div class="event-left">
+        <div id="time">12:20</div>
+        <div id="icon"><a href="#"><img src=https://is4-ssl.mzstatic.com/image/thumb/Purple62/v4/25/3e/5d/253e5de1-1411-c919-410a-c3628a666a5b/mzl.rehriusj.png/246x0w.jpg></a></div>
+    </div>
+    <div class="event-right">
+        <div class="information">
+            <div id="date">April 21, 2018</div>
+            <div id="event"><a href="#">THIS IS NOT A LONG TITLE</a></div>
+            <div id="location"><a href="#">333 Lonely Street, Anaheim, California 333 Lonely Street, Anaheim, California</a></div>
+            <div id="description">Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
+                    Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="date-marker">
+        DAY 2 GOES HERE
+    </div>
+    <div class="event">
+        <div class="event-left">
+            <div id="time">12:20</div>
+            <div id="icon"><img src=https://is4-ssl.mzstatic.com/image/thumb/Purple62/v4/25/3e/5d/253e5de1-1411-c919-410a-c3628a666a5b/mzl.rehriusj.png/246x0w.jpg></div>
+        </div>
+        <div class="event-right">
+            <div class="information">
+                <div id="date">April 21, 2018</div>
+                <div id="event">THIS IS NOT A LONG TITLE </div>
+                <div id="location">333 Lonely Street, Anaheim, California 333 Lonely Street, Anaheim, California</div>
+                <div id="description">Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
+                        Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
                 </div>
             </div>
         </div>
+    </div>
+    <div id="date-marker">
+            DAY 3 GOES HERE
+        </div>
+        <div class="event">
+            <div class="event-left">
+                <div id="time">12:20</div>
+                <div id="icon"><img src=https://is4-ssl.mzstatic.com/image/thumb/Purple62/v4/25/3e/5d/253e5de1-1411-c919-410a-c3628a666a5b/mzl.rehriusj.png/246x0w.jpg></div>
+            </div>
+            <div class="event-right">
+                <div class="information">
+                    <div id="date">April 21, 2018</div>
+                    <div id="event">THIS IS NOT A LONG TITLE </div>
+                    <div id="location">333 Lonely Street, Anaheim, California 333 Lonely Street, Anaheim, California</div>
+                    <div id="description">Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
+                            Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="date-marker">
+                DAY GOES HERE
+            </div>
+            <div class="event">
+                <div class="event-left">
+                    <div id="time">12:20</div>
+                    <div id="icon"><img src=https://is4-ssl.mzstatic.com/image/thumb/Purple62/v4/25/3e/5d/253e5de1-1411-c919-410a-c3628a666a5b/mzl.rehriusj.png/246x0w.jpg></div>
+                </div>
+                <div class="event-right">
+                    <div class="information">
+                        <div id="date">April 21, 2018</div>
+                        <div id="event">THIS IS NOT A LONG TITLE </div>
+                        <div id="location">333 Lonely Street, Anaheim, California 333 Lonely Street, Anaheim, California</div>
+                        <div id="description">Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
+                                Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
+                        </div>
+                    </div>
+                </div>
+            </div>
 {% endblock %}
