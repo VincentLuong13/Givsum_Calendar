@@ -34,27 +34,27 @@
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <a href="/"><img src="http://i64.tinypic.com/dcvji9.png" height="35px"></a>
             <ul class="navbar-nav ml-auto">
-                <button type="button" class="btn btn-outline-light" style="font-weight: bold;">CALENDAR</button> <!-- calendar view button -->
+                <a href = "/calendarPage/" class="btn btn-outline-light"  style="font-weight: bold;" >CALENDAR</a> <!-- calendar view button -->
                 &nbsp;
-                <button type="button" class="btn btn-outline-light" style="font-weight: bold;">SCHEDULE</button> <!-- schedule view button -->
+                <a href = "/" class="btn btn-outline-light"  style="font-weight: bold;" >SCHEDULE</a> <!-- calendar view button --> <!-- schedule view button -->
             </ul>
         </div>
     </nav>
     <!-- nav bar end -->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 border-right" style="background-color: #f2f2f2;"  >
+            <div class="col-3 border-right" style="background-color: #f2f2f2;" >
                 <!-- left column content goes here -->
                 <div class="box"><center><B><font color="white">calendar</font></B></center></div>
                 <div class="btn-group btn-group-toggle btn-group-vertical filters" data-toggle="buttons">
                     <label class="btn btn-light active">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> All Events
                     </label>
                     <label class="btn btn-light">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                        <input type="radio" name="options" id="option2" autocomplete="off"> My Events
                     </label>
                     <label class="btn btn-light">
-                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                        <input type="radio" name="options" id="option3" autocomplete="off"> On Going Events
                     </label>
                     </div>
             </div>
