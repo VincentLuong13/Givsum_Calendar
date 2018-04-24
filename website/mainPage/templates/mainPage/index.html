@@ -91,27 +91,50 @@
 {% endblock %}
 
 {% block right %}
-<div id="date-marker">
-    DAY GOES HERE
-</div>
+{% for event in events %}
+    {% if event.day_name == 0 %}
+        <div id="date-marker"> MONDAY {{event.date_time.day}}</div>
+    {% endif %}
+    {% if event.day_name == 1 %}
+        <div id="date-marker"> TUESDAY {{event.date_time.day}}</div>
+    {% endif %}
+    {% if event.day_name == 2 %}
+        <div id="date-marker"> WEDNESDAY {{event.date_time.day}}</div>
+    {% endif %}
+    {% if event.day_name == 3 %}
+        <div id="date-marker"> THURSDAY {{event.date_time.day}}</div>
+    {% endif %}
+    {% if event.day_name == 4 %}
+        <div id="date-marker"> FRIDAY {{event.date_time.day}}</div>
+    {% endif %}
+    {% if event.day_name == 5 %}
+        <div id="date-marker"> SATURDAY {{event.date_time.day}}</div>
+    {% endif %}
+    {% if event.day_name == 6 %}
+        <div id="date-marker"> SUNDAY {{event.date_time.day}}</div>
+    {% endif %}
 
-<div class="event">
-    <div class="event-left">
-        <div id="time">12:20</div>
-        <div id="icon"><a href="#"><img src=https://is4-ssl.mzstatic.com/image/thumb/Purple62/v4/25/3e/5d/253e5de1-1411-c919-410a-c3628a666a5b/mzl.rehriusj.png/246x0w.jpg></a></div>
-    </div>
-    <div class="event-right">
-        <div class="information">
-            <div id="date">April 21, 2018</div>
-            <div id="event"><a href="#">THIS IS NOT A LONG TITLE</a></div>
-            <div id="location"><a href="#">333 Lonely Street, Anaheim, California 333 Lonely Street, Anaheim, California</a></div>
-            <div id="description">Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
-                    Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig Big Mood.Big MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig MoodBig Mood
+    <div class="event">
+        <div class="event-left">
+            {% if event.date_time.minute  == 0 %}
+                <div id="time">{{event.date_time.hour}}:{{event.date_time.minute}}0 </div>
+            
+            {% else %}
+                <div id="time">{{event.date_time.hour}}:{{event.date_time.minute}} </div>
+            {% endif %}
+
+            <div id="icon"><a href={{event.event_url}}><img src= {{event.picture_url}}></a></div>
+        </div>
+        <div class="event-right">
+            <div class="information">
+                <div id="date">April 21, 2018</div>
+                <div id="event"><a href={{event.event_url}}>{{event.name}}</a></div>
+                <div id="location"><a href="#">{{event.address}}</a></div>
+                <div id="description">{{event.event_description}}</div>
             </div>
         </div>
     </div>
-</div>
-
+{% endfor %}
 <div id="date-marker">
         DAY 2 GOES HERE
     </div>

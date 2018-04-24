@@ -1,5 +1,5 @@
 from django.db import models
-import time
+import time,datetime
 
 class Organization(models.Model):
     name = models.CharField(max_length = 100)
@@ -12,11 +12,14 @@ class Organization(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length = 250)
-    time = models.CharField(max_length = 250)
-    date = models.CharField(max_length = 250)
+    date_time = models.DateTimeField(default=datetime.datetime.now(), blank=True)
+    day_name = models.IntegerField(default = datetime.datetime.now().weekday())
+    duration =models.IntegerField(default=0)
     event_description = models.CharField(default = '' ,max_length = 750)
     address = models.CharField(default = '' ,max_length = 750)
-    picture_url = models.CharField(default = '' ,max_length = 1000)
+    picture_url = models.CharField(default = '' ,max_length = 3000)
+    event_url = models.CharField(default = '' ,max_length = 3000)
+
 
     def __str__(self):
         return self.name
