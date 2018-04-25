@@ -91,27 +91,35 @@
 {% endblock %}
 
 {% block right %}
+<!-- Iterating throught Events Dictionary to get days and its events -->
+
 {% for date, events in ev_dict.items %}
+        <!-- Creates day seperator (sticky)  -->
         <div id="date-marker"> {{date}} </div>
+    
+    <!--  Iterate through the Events of that day -->
     {% for event in events %}
         <div class="event">
             <div class="event-left">
+                <!-- Time  -->
                 {% if event.date_time.minute  == 0 %}
                     <div id="time">{{event.date_time.hour}}:{{event.date_time.minute}}0 </div>
                 {%elif event.date_time.minute < 10 %}
                 <div id="time">{{event.date_time.hour}}:0{{event.date_time.minute}} </div>
-                
                 {% else %}
                     <div id="time">{{event.date_time.hour}}:{{event.date_time.minute}} </div>
                 {% endif %}
-
+                
+                <!-- Picture  -->
                 <div id="icon"><a href={{event.event_url}}><img src= {{event.picture_url}}></a></div>
             </div>
+            <!-- Event Information -->
             <div class="event-right">
                 <div class="information">
-                    {% for k, v in months.items %}
-                        {% if k == event.date_time.month %}
-                            <div id="date">{{ v }} {{event.date_time.day}}</div>
+                    <!-- Iterate through days of month for text  -->
+                    {% for key, n_month in months.items %}
+                        {% if key == event.date_time.month %}
+                            <div id="date">{{ n_month }} {{event.date_time.day}}</div>
                         {% endif %}
                     {% endfor %}
                     <div id="event"><a href={{event.event_url}}>{{event.name}}</a></div>
@@ -122,5 +130,6 @@
         </div>
     {% endfor %}
 {% endfor %}
+<!-- End of Iteration  -->
 
 {% endblock %}
