@@ -7,9 +7,11 @@ from collections import defaultdict
 def index(request):
     event_dict = defaultdict(list)
     events = Event.objects.all()
+    # trying dictionary
     for ev in sorted(events,key = lambda x: x.date_time):
-        event_dict[ev.date_time.day].append(ev)
-    return render(request,'mainPage/index.html',{'events': sorted(events,key = lambda x: x.date_time),'ev_dict': event_dict})
+        event_dict[str(ev.date_time.strftime("%A")) + ' '+str(ev.date_time.day) +', '+ str(ev.date_time.year)].append(ev)
+    month = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}
+    return render(request,'mainPage/index.html',{'ev_dict': dict(event_dict), "months": month})
 
 def calendarPage(request):
     year = datetime.date.today().year
