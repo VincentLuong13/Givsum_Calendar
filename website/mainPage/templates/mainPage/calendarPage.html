@@ -110,7 +110,7 @@
     <ul>  
         <li class="next">&#10095;</li>
         <li class="prev">&#10094;</li>
-        <li>{{name_of_month}} {{year}}</li>
+        <li>{{cur_name_of_month}} {{cur_year}}</li>
 
 
     </ul>
@@ -129,8 +129,14 @@
   
   <!-- creating each day and events  -->
   <ul class="days">
-    {% for i in num_days %}   
-    <li>{{ forloop.counter }}<BR><span class="dot" style="background-color: coral;"></span> event name here !!</li>
+    {% for i in cur_num_days %}
+        <li>{{ forloop.counter }}<BR>
+            {% for event in events %}
+                {% if event.date_time.day == forloop.parentloop.counter and event.date_time.month == cur_month and event.date_time.year == cur_year %}
+                <span class="dot" style="background-color: coral;"></span> {{event.name}}<BR>
+                {% endif %}
+            {% endfor %}
+        </li>
     {% endfor %}
   </ul>
 
