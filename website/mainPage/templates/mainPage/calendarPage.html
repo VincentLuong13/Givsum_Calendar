@@ -61,14 +61,14 @@
 
         /* Days (1-31) */
         .days {
-            padding: 10px 0px 0px 25px;
+            padding: 10px 0px 5px 25px;
             background: #eee;
             margin: 0px;
         }
 
         .days li {
             list-style-type: none;
-            display: inline-block;
+            display: inline-table;
             padding: 5px 0px 5px 10px;
             width: 13.6%;
             height: 14%;
@@ -90,6 +90,104 @@
             border-radius: 50%;
             display: inline-block;
         }
+        .day-event {
+            overflow-y: auto;
+            height: 85%;
+        }
+
+
+        /* SMALL CALENDAR */
+        
+        .calendar {
+            position: fixed;
+        }
+
+        /* Month header */
+        .s-month {
+            padding: 10px 10px;
+            margin: 30px 0px 0px 20px;
+            width: 58%;
+            background: coral;
+            text-align: right;
+        }
+
+        /* Month list */
+        .s-month ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .s-month ul li {
+            color: white;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: inline;
+        }
+
+        /* Previous button inside month header */
+        .s-month .prev {
+            float: right;
+            padding-top: 10px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            transform: translate(-40%, -36%);
+        }
+
+        /* Next button */
+        .s-month .next {
+            float: right;
+            padding-top: 10px;
+            margin-left: 5px;
+            margin-bottom: 10px;
+            transform: translate(-40%, -36%);
+        }
+
+        /* Weekdays (Mon-Sun) */
+        .s-weekdays {
+            margin: 0 20px;
+            padding: 10px 10px;
+            background-color:#ddd;
+            font-size: 12px;
+            width: 58%;
+        }
+
+        .s-weekdays li {
+            display: inline-block;
+            width: 11%;
+            color: #666;
+            text-align: center;
+            margin-left: 8px;
+        }
+
+        /* Days (1-31) */
+        .s-days {
+            padding: 10px 0px 5px 10px;
+            background: #eee;
+            width: 58%;
+            margin: 0 20px;
+        }
+
+        .s-days li {
+            list-style-type: none;
+            display: inline-block;
+            width: 11%;
+            height: 3%;
+            text-align: center;
+            margin-bottom: 5px;
+            margin-left: 6px;
+            font-size:12px;
+            color: #777;
+        }
+
+        /* Highlight the "current" day */
+        .s-days li .active {
+            padding: 5px;
+            background: #1abc9c;
+            color: white !important
+        }
+
+
     </style>
 {% endblock %}
 
@@ -118,24 +216,29 @@
   
   <!-- Days of the week bar  -->
   <ul class="weekdays">
+    <li>Su</li>
     <li>Mo</li>
     <li>Tu</li>
     <li>We</li>
     <li>Th</li>
     <li>Fr</li>
     <li>Sa</li>
-    <li>Su</li>
   </ul>
   
   <!-- creating each day and events  -->
   <ul class="days">
+    {%for i in first_day%}
+    <li>&nbsp;</li>
+    {% endfor %}
     {% for i in cur_num_days %}
-        <li>{{ forloop.counter }}<BR>
+        <li>{{ forloop.counter }}
+            <div class="day-event">
             {% for event in events %}
                 {% if event.date_time.day == forloop.parentloop.counter and event.date_time.month == cur_month and event.date_time.year == cur_year %}
-                <span class="dot" style="background-color: coral;"></span> {{event.name}}<BR>
+                <div><span class="dot" style="background-color: coral;"></span> {{event.name}}</div>
                 {% endif %}
             {% endfor %}
+            </div>
         </li>
     {% endfor %}
   </ul>
