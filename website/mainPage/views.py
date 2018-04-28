@@ -56,7 +56,7 @@ def calendarPage(request):
     day = today_date.day
     events = Event.objects.all()
     return render(request,'mainPage/calendarPage.html',
-    {'events': sorted(events,key = lambda x: x.name),
+    {'events': sorted(events,key = lambda x: x.date_time),
     'cur_name_of_month' :calendar.month_name[month],
     'cur_num_days': range(calendar.monthrange(year,month)[1]),
     'cur_year':year,
