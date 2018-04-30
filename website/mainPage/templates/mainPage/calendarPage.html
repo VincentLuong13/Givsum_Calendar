@@ -202,10 +202,11 @@
                 <div class="events">
                     {% for event in events %}
                         {% if event.date_time.day == forloop.parentloop.counter and event.date_time.month == cur_month and event.date_time.year == cur_year %}
-                        <div><span class="dot" style="background-color: coral;"></span>{{event.name}}</div>
+                        <div><span class="dot" style="background-color: pink"></span>{{event.name}}</div>
                         {% endif %}
                     {% endfor %}
                 </div>
+                
             </td>
                 {% if forloop.counter|add:num_day|divisibleby:7%}
                     </tr><tr>
