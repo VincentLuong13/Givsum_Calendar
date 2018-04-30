@@ -16,7 +16,6 @@ def get_calendar_variables(c_year = 0, c_month = 0, c_week = 0):
     day = today_date.day
 
     today = datetime.datetime.today()
-    print(today.day, today.month, today.year)
     info_dict = {'cur_name_of_month' :calendar.month_name[month],
     'cur_num_days': range(calendar.monthrange(year,month)[1]),
     'cur_year':year,
