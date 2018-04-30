@@ -3,23 +3,7 @@ from .models import Organization, Event
 import datetime
 import calendar
 from collections import defaultdict
-
-def get_calendar_variables():
-    today_date = datetime.datetime.today()#name messes up the size of the small calendar
-    first_day = {'Sunday': 1,'Monday': 2,'Tuesday': 3,'Wednesday': 4,'Thursday': 5,'Friday': 6,'Saturday': 7}[today_date.replace(day=1).strftime("%A")]
-    year = today_date.year
-    month = today_date.month
-    day = today_date.day
-
-    info_dict = {'cur_name_of_month' :calendar.month_name[month],
-    'cur_num_days': range(calendar.monthrange(year,month)[1]),
-    'cur_year':year,
-    'cur_month':month,
-    'cur_day' : day,
-    'cur_name_of_day' : datetime.datetime.now().strftime("%A"),
-    'first_day':range(first_day-1)}
-    
-    return info_dict
+from .handle_calendar import get_calendar_variables
     
 
 def index(request):
@@ -37,7 +21,8 @@ def index(request):
     
 
 def calendarPage(request):
-    events = Event.objects.all()
+    cal_var = get_calendar_variables(c_month = 2)
+    events = Event.objects.filter(date_time__month = cal_var["cur_month"])
     insert_dict = {'events': sorted(events,key = lambda x: x.date_time)}
-    insert_dict.update(get_calendar_variables())
+    insert_dict.update(cal_var)
     return render(request,'mainPage/calendarPage.html',insert_dict)
