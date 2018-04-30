@@ -206,14 +206,31 @@
     </div>
     </div> 
     <ul>  
-        <li class="next">&#10095;</li>
+            <!-- <button type ="button" id="next"> -->
+        <li class="next" >&#10095;</li>
         <li class="prev">&#10094;</li>
         <li>{{cur_name_of_month}} {{cur_year}}</li>
 
 
     </ul>
   </div>
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+//   $(document).ready(function(){
+
+    //   $(".prev").click(function(){
+    //       alert("xd");
+    //   })
+
+    $(document).ready(function(){
+      $(".next").click(function(){
+          window.location.href = "{% url 'mainPage:nextMonth' %}";   
+    });
+      $(".prev").click(function(){
+          window.location.href = "{% url 'mainPage:prevMonth' %}";   
+    });
+ })
+  </script>
   <!-- Days of the week bar  -->
   <ul class="weekdays">
     <li>Su</li>
