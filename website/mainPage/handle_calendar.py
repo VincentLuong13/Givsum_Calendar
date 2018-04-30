@@ -15,12 +15,20 @@ def get_calendar_variables(c_year = 0, c_month = 0, c_week = 0):
     month = today_date.month
     day = today_date.day
 
+    today = datetime.datetime.today()
+    print(today.day, today.month, today.year)
     info_dict = {'cur_name_of_month' :calendar.month_name[month],
     'cur_num_days': range(calendar.monthrange(year,month)[1]),
     'cur_year':year,
     'cur_month':month,
     'cur_day' : day,
+    'today_day' : today.day,
+    'today_month': today.month,
+    'today_year': today.year,
     'cur_name_of_day' : datetime.datetime.now().strftime("%A"),
-    'first_day':range(first_day-1)}
+    'first_day':range(first_day-1),
+    'num_day': first_day - 1,
+    'remainder': (8-first_day)
+    }
     
     return info_dict

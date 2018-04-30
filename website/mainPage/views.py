@@ -60,3 +60,10 @@ def prevMonth(request):
         cal_month -= 1
 
     return HttpResponseRedirect('/calendarpage')
+
+def resetToCurrent(request):
+    global cal_month
+    global cal_year
+    cal_year = datetime.datetime.today().year
+    cal_month  = datetime.datetime.today().month
+    return HttpResponseRedirect('/calendarpage')

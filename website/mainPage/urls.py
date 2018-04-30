@@ -8,4 +8,5 @@ urlpatterns = [
     path('calendarpage/',views.calendarPage , name = 'calendar'),
     path('calendarpage/nextMonth/', views.nextMonth, name = 'nextMonth'),
     path('calendarpage/prevMonth/', views.prevMonth, name = 'prevMonth'),
+    path('calendarpage/curDay/', views.resetToCurrent, name = 'currentTime'),
 ]
