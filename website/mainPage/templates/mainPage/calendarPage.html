@@ -1,147 +1,12 @@
 {% extends 'base.html' %}
 {% block head %}
-    <style>
-        body {font-family: Helvetica, sans-serif;}
-
-        <style type="text/css">     
-        
-            ::-webkit-scrollbar {
-                width: 4px;
-            }
-
-            ::-webkit-scrollbar-track {
-                background: #f1f1f1; 
-            }
-
-            ::-webkit-scrollbar-thumb {
-                background: #ddd; 
-            }
-
-            table {
-                width: 100%;
-                table-layout: fixed;
-            }
-
-            .calendar{ 
-                position: relative;
-                width: 100%;
-                margin: auto;
-                background-color:#fbfbfb;
-            }
-
-            .month {
-                width: 100%;
-                padding: 20px 25px;
-                margin: 20px auto 0px auto;
-                text-align:right;
-                background-color:coral;
-                color: white;
-                font-size: 27px;
-                text-transform: uppercase;
-                font-weight: bold;
-            }
-
-            .week {
-                width: 100%;
-                table-layout: fixed;
-                padding:5px 0px;
-                margin: auto;
-                background-color:#ddd;
-            }
-
-            .weekday {
-                height: 30px;
-                text-align: center;
-                color: #666;
-                font-size: 14px;
-                text-transform: uppercase;
-            }
-
-            .date{
-                position: relative;
-                height: calc((100vh - 90px) / 7);
-                color: #777;
-                border-bottom: 1px solid #ddd;
-                border-left: 1px solid #ddd;
-                border-right: 1px solid #ddd;
-            }
-
-            .empty {
-                position: relative;
-                height: 120px;
-                border-bottom: 1px solid #ddd;
-            }
-
-            .day {
-                position: relative;
-                top: -1px;
-                left: 5px;
-                width: 20px;
-                height: 20px;
-                text-align: center;
-                padding-top: 1px; 
-                font-size:12px;
-                color: #777;
-                font-weight: bold;
-            }
-
-            .today {
-                position: relative;
-                height: 125px;
-                color: #777;
-                border: 1px solid #ddd;
-                background-color: #eee;
-            }
-
-            .events {
-                position: relative;
-                height: 70%;
-                width: 95%;
-                overflow-y: auto;
-                left: 5px;
-                top: 2px;
-                font-size: 12px;
-                padding: 0 5px;
-            }
-
-            .dot {
-                height: 7px;
-                width: 7px;
-                border-radius: 50%;
-                display: inline-block;
-                margin-right: 5px;
-            }
-
-            .next {
-                padding: 2px 3px;
-            }
-
-            .next a:hover {
-                color: #ffa584;
-                text-decoration: none;
-            }
-
-            .prev {
-                padding: 2px 3px;
-            }
-
-            .prev a:hover {
-                color: #ffa584;
-                text-decoration: none;
-            }
-
-            a {
-                text-decoration:none;
-                color: white;
-            }
-
-
-    </style>
+    {% load static %}
+    <link rel='stylesheet' href = "{% static 'mainPage/calendarPage.css' %}">
 {% endblock %}
-
 {% block right %}
-
+<!-- start of calendar -->
 <div class="month">
+    <!-- start drop down menu -->
     <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle float-left" style="background-color: coral; border: coral; color: white;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         MONTH
@@ -151,8 +16,10 @@
         <a class="dropdown-item active" href="#">MONTH</a>
         <a class="dropdown-item" href="#">YEAR</a>
     </div>
-    </div>     
-    {{cur_name_of_month}} {{cur_year}}        
+    </div>
+    <!-- end drop down menu -->     
+    {{cur_name_of_month}} {{cur_year}}
+    <!-- arrows -->        
     <span class="prev"><a href="#">&#10094;</a></span>
     <span class="next"><a href="#">&#10095;</a></span>
 </div>
@@ -184,15 +51,18 @@
         </tr>
     </table>
 </div>
-
+<!-- start of days of calendar -->
 <div class="calendar">
     <table>
         <tr>
+            <!-- iterating through the empty days of the month -->
             {%for i in first_day%}
             <td class="empty">
             </td>
-            {% endfor %}  
+            {% endfor %}
+            <!-- iterating through the amount of days of the month -->  
             {% for i in cur_num_days %}
+            <!-- checking if the day is todays date -->
             {% if today_day == forloop.counter and cur_month == today_month and cur_year == today_year %}
                 <td class="today">
             {% else %}
@@ -200,7 +70,9 @@
             {% endif %}    
                 <div class="day">{{forloop.counter}}</div>
                 <div class="events">
+                    <!-- iterating through the events to check for the day -->
                     {% for event in events %}
+                        <!-- checking if event is in date -->
                         {% if event.date_time.day == forloop.parentloop.counter and event.date_time.month == cur_month and event.date_time.year == cur_year %}
                         <div><span class="dot" style="background-color: pink"></span>{{event.name}}</div>
                         {% endif %}
@@ -215,7 +87,7 @@
         </tr>
     </table>
 </div>
-
+<!-- end of days calendar -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
 //   $(document).ready(function(){
@@ -226,10 +98,11 @@
 
     $(document).ready(function(){
       $(".next").click(function(){
-          window.location.href = "{% url 'mainPage:nextMonth' %}";   
+        window.location.href = "{% url 'mainPage:nextView' view=n_view year=n_year month=n_month day=n_day %}";
+ 
     });
       $(".prev").click(function(){
-          window.location.href = "{% url 'mainPage:prevMonth' %}";   
+        window.location.href = "{% url 'mainPage:prevView' view=n_view year=n_year month=n_month day=n_day %}";  
     });
     $(".today-button").click(function(){
           window.location.href = "{% url 'mainPage:currentTime' %}";   
