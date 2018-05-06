@@ -1,8 +1,49 @@
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <style>
         body{
             font-family: Helvetica;
             font-size:30px;
+            font-weight: lighter;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 50px;
+            font-weight: lighter;
+            color: #fff;
+        }
+
+        .login {
+            margin: auto;
+            background-color: coral;
+            width: 30%;
+            height: 50%;
+            align-content: center;
+        }
+
+        .logo img {
+            height: 80px;
+            margin-top: 60px;
+            margin-bottom: 50px;
+        }
+
+        form {
+            display: block;
+            margin-top: 30px;
+        }
+
+        .btn-light {
+            display: block;
+            width: 160px;
+            height: 45px;
+            text-transform: uppercase;
+            color: coral;
+            background-color: #fff;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 30px;
         }
 
 </style>
@@ -10,13 +51,16 @@
 
 <body>
     <container>
-        <h1>Login</h1>
-        <div>
-            <form method = "post">
+        <div class="logo"><center><img src="http://i64.tinypic.com/dcvji9.png"></center></div>
+        <div class="login">
+            <center>
+            <h1>Sign In</h1>
+            <form method="post">
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type = "submit">Login</button>
+                <button type="submit" class="btn btn-light">Sign In</button>
             </form>
+            </center>
         </div>
     </container>
 
