@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% block head %}
+    {% load static %}
+    <link rel='stylesheet' href = "{% static 'mainPage/calendarPage.css' %}">
+    <link rel='stylesheet' href = "{% static 'mainPage/yearcal.css' %}">
+{% endblock %}
+{% block right %}
+<!-- start of calendar -->
+<table class="year">
+    {%for i in "x"|rjust:"12"%}
+
+        <td>
+                <div class="y-month">
+                        MONTH
+                    </div>
+                
+                    <div class="y-week">
+                        <table>
+                            <tbody>
+                                    <tr>
+                                        <td class="y-weekday">
+                                            S
+                                        </td>            
+                                        <td class="y-weekday">
+                                            M
+                                        </td>
+                                        <td class="y-weekday">
+                                            T
+                                        </td>
+                                        <td class="y-weekday">
+                                            W
+                                        </td>
+                                        <td class="y-weekday">
+                                            T
+                                        </td>
+                                        <td class="y-weekday">
+                                            F
+                                        </td>
+                                        <td class="y-weekday">
+                                            S
+                                        </td>            
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                    <div class="y-calendar">
+                            
+                    <table>
+                    <tbody>
+                    <tr>
+            
+                    <td class="y-date">
+                        <div class="y-day">1</div>
+                    </td>
+            
+                    <td class="y-date">
+                        <div class="y-day">1</div>
+                    </td>
+            
+                    <td class="y-date">
+                        <div class="y-day">1</div>
+                    </td>
+            
+                    <td class="y-date">
+                        <div class="y-day">1</div>
+                    </td>
+            
+                    <td class="y-date">
+                        <div class="y-day">1</div>
+                    </td>
+            
+                    <td class="y-date">
+                            <div class="y-day">1</div>
+                    </td>
+            
+                    <td class="y-date">
+                            <div class="y-day">1</div>
+                    </td>
+            
+                    </tr>
+            
+            
+            
+                    <tr>
+            
+                            <td class="y-date">
+                                    <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                    <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                            </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-today">
+                                            <div class="y-day">12</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>        
+                    </tr>
+            
+            
+            
+                    <tr>
+            
+                            <td class="y-date">
+                                    <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                    <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                            </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                    </tr>
+            
+            
+            
+                    <tr>
+            
+                            <td class="y-date">
+                                    <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                    <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                            </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                    </tr>
+            
+            
+            
+                    <tr>
+            
+                            <td class="y-date">
+                                    <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                    <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                            </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                            <div class="y-day">1</div>
+                                    </td>
+                            
+                                    <td class="y-date">
+                                    </td>
+                            
+                                    <td class="y-date">
+                                    </td>
+            
+                    </tr>
+            
+                    </tbody>
+                    </table>
+                    </div>
+        </td>
+        {% if forloop.counter|divisibleby:4%}
+            </tr><tr>
+        {%endif%}
+    {%endfor %}
+</table>
+
+    
+
+<!-- end of days calendar -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+  $(document).ready(function(){
+    $(".next").click(function(){
+      window.location.href = "{% url 'mainPage:nextView' view=n_view year=n_year month=n_month day=n_day %}";
+
+  });
+    $(".prev").click(function(){
+      window.location.href = "{% url 'mainPage:prevView' view=n_view year=n_year month=n_month day=n_day %}";  
+  });
+  $(".today-button").click(function(){
+        window.location.href = "{% url 'mainPage:currentTime' %}";   
+  });
+})
+</script>
+
+
+{% endblock %}

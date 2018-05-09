@@ -1,0 +1,92 @@
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.y-calendar{ 
+    width: 95%;
+    margin: auto;
+    padding: 0px 5px 10px 5px;
+}
+
+.y-month {
+    width: 95%;
+    padding: 10px 20px 0px 20px;
+    margin: auto;
+    text-align: left;
+    color: #777;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.y-week {
+    width: 95%;
+    table-layout: fixed;
+    margin: auto;
+    padding: 0px 5px;
+}
+
+.y-weekday {
+    height: 30px;
+    font-size: 14px;
+    text-align: center;
+    color: #666;
+    font-weight: bold;
+}
+
+.y-date{
+    position: relative;
+    height: 30px;
+    color: #777;
+}
+
+.y-day{
+    text-align: center;    
+    font-size:12px;
+    width: 25px;
+    height: 25px;
+    margin: auto;
+    padding-top: 3px;
+    padding-right: 1px;
+}
+
+.y-today {
+    position: relative;
+    height: 35px;
+    color: #777;
+}
+
+.y-today .y-day {
+    background-color: pink; 
+    color: white;
+    border-radius: 50%;
+}
+
+.y-events {
+    position: relative;
+    height: 70%;
+    width: 95%;
+    overflow-y: auto;
+    left: 5px;
+    top: 2px;
+    font-size: 12px;
+}
+
+body {
+    background-color:#fff;
+    font-family:'Helvetica';
+}
+
+a {
+    text-decoration:none;
+    color: white;
+}
+
+.year {
+    /*width: 70%;*/
+}
+

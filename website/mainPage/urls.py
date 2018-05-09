@@ -11,5 +11,6 @@ urlpatterns = [
     re_path(r'^(?P<view>month|week|year)\/(?P<year>[1-9]?[0-9]{3})-(?P<month>[0-1]?[0-9])-(?P<day>[0-3]?[0-9])/$', views.cal, name = 'cal'), #month/2018-10-3, changes the current view using the desired view type, and the date. Uses calendarpage.html to create the calendar
     path('calendarpage/nextView/<str:view>/<int:year>/<int:month>/<int:day>/', views.nextView, name = "nextView"), #calendarpage/nextView/month/2018/10/3, uses the nextView function to increment the view type to display the next view, then redirects the link to show the updated view
     path('calendarpage/prevView/<str:view>/<int:year>/<int:month>/<int:day>/', views.prevView, name = "prevView"), #calendarpage/prevView/week/2018/10/3, uses thep prevView function to decrement the view type to display the next view, then redirects thel ink tos how the updated view 
-    path('login/',login,{'template_name':'mainPage/login.html'})
+    path('login/',login,{'template_name':'mainPage/login.html'}),
+    path('calendarpage/year/', views.yearview, name = 'yearview'),
 ]
