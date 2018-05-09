@@ -31,3 +31,10 @@ def get_calendar_variables(c_year = 0, c_month = 0, c_week = 0):
     }
     
     return info_dict
+
+def handle_year_info(year):
+    return_dict = {}
+    for i in range(12):
+        info = get_calendar_variables(2018,i+1,0)
+        return_dict[info['cur_name_of_month']] = info
+    return return_dict
