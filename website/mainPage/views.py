@@ -69,7 +69,6 @@ def cal(request, view, year, month, day):
         insert_dict.update(cal_var)
         data = {'n_view': view, 'n_year': year, 'n_month': month, 'n_day': day}
         insert_dict.update(data)
-    
     return render(request,'mainPage/calendarPage.html', insert_dict)
 
 def nextView(request, view, year, month, day):
@@ -113,11 +112,12 @@ def yearview(request):
     cal_var = get_calendar_variables(c_month = today_date.month, c_year = today_date.year) #retrieves all the variables for the current calendar month/year
 
     data = {'n_view': 'month', 'n_year': today_date.year, 'n_month': today_date.month, 'n_day': today_date.day} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
-    events = Event.objects.filter(date_time__month = cal_var["cur_month"])
+    events = Event.objects.filter(date_time__year = cal_var["cur_year"])
 
     insert_dict = {'events': sorted(events,key = lambda x: x.date_time)} #creates a dictionary with the events in the current month
 
     insert_dict.update(cal_var) #adds the calendar variables into the dictionary that will passed onto html
     insert_dict.update(data) #adds needed data into the dictionary that will passed onto html
-    insert_dict['year_information'] = handle_year_info(2018)#gets information for year
+    insert_dict['year_info'] = handle_year_info(2018)#gets information for year
+
     return render(request,'mainPage/yearCal.html',insert_dict)

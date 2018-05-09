@@ -7,11 +7,11 @@
 {% block right %}
 <!-- start of calendar -->
 <table class="year">
-    {%for i in "x"|rjust:"12"%}
+    {%for month,month_info in year_info.items%}
 
         <td>
                 <div class="y-month">
-                        MONTH
+                        {{month_info.cur_name_of_month}}
                     </div>
                 
                     <div class="y-week">

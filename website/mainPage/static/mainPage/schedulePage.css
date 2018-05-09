@@ -83,3 +83,10 @@
         top: 0px;
         z-index: 1;
     }
+
+    #attendeebutton{
+        background-color: coral;
+        text:white;
+        text-transform: uppercase;
+        padding: 10px;
+    }

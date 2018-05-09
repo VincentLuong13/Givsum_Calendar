@@ -25,7 +25,7 @@
                 {% endif %}
                 
                 <!-- Picture  -->
-                <div id="icon"><a href={{event.event_url}}><img src= {{event.0.picture_url}}></a></div>
+                <div id="icon"><a href={{event.0.event_url}}><img src= {{event.0.picture_url}}></a></div>
             </div>
             <!-- Event Information -->
             <div class="event-right">
@@ -36,7 +36,7 @@
                             <div id="date">{{ n_month }} {{event.0.date_time.day}}</div>
                         {% endif %}
                     {% endfor %}
-                    <div id="event"><a href={{event.event_url}}>{{event.0.name}}</a></div>
+                    <div id="event"><a href="{{event.0.event_url}}">{{event.0.name}}</a></div>
                     <div id="location"><a href="#">{{event.0.address}}</a></div>
                     <div id="description">{{event.0.event_description}}</div>
                     <button href="#" class="btn btn-sm btn-warning" id = "atendeebutton">{{event.1}} Attendees</button>
