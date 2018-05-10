@@ -84,9 +84,50 @@
         z-index: 1;
     }
 
-    #attendeebutton{
-        background-color: coral;
-        text:white;
-        text-transform: uppercase;
+    .btn-people { 
+        color: #FFFFFF; 
+        background-color: #FF7F50; 
+        border-color: #FF7F50;
         padding: 10px;
-    }
+        letter-spacing: 1px;
+      } 
+       
+      .btn-people:hover, 
+      .btn-people:focus, 
+      .btn-people:active, 
+      .btn-people.active, 
+      .open .dropdown-toggle.btn-people { 
+        color: #FFFFFF; 
+        background-color: #E3683B; 
+        border-color: #FF7F50; 
+      } 
+       
+      .btn-people:active, 
+      .btn-people.active, 
+      .open .dropdown-toggle.btn-people { 
+        background-image: none; 
+      } 
+       
+      .btn-people.disabled, 
+      .btn-people[disabled], 
+      fieldset[disabled] .btn-people, 
+      .btn-people.disabled:hover, 
+      .btn-people[disabled]:hover, 
+      fieldset[disabled] .btn-people:hover, 
+      .btn-people.disabled:focus, 
+      .btn-people[disabled]:focus, 
+      fieldset[disabled] .btn-people:focus, 
+      .btn-people.disabled:active, 
+      .btn-people[disabled]:active, 
+      fieldset[disabled] .btn-people:active, 
+      .btn-people.disabled.active, 
+      .btn-people[disabled].active, 
+      fieldset[disabled] .btn-people.active { 
+        background-color: #FF7F50; 
+        border-color: #FF7F50; 
+      } 
+       
+      .btn-people .badge { 
+        color: #FF7F50; 
+        background-color: #FFFFFF; 
+      }

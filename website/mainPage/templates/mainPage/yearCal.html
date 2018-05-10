@@ -6,8 +6,27 @@
 {% endblock %}
 {% block right %}
 <!-- start of calendar -->
-<table class="year">
-    {%for month,month_info in year_info.items%}
+<div class="month">
+        <!-- start drop down menu -->
+        <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle float-left" style="background-color: coral; border: coral; color: white;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                MONTH
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">WEEK</a>
+                <a class="dropdown-item" href="#">MONTH</a>
+                <a class="dropdown-item active" href="/calendarpage/year/">YEAR</a>
+        </div>
+        </div>
+        <!-- end drop down menu -->     
+        {{cur_year}}
+        <!-- arrows -->        
+        <span class="prev"><a href="#">&#10094;</a></span>
+        <span class="next"><a href="#">&#10095;</a></span>
+</div>
+<table class="year">        
+        
+        {%for month,month_info in year_info.items%}
 
         <td>
                 <div class="y-month">
@@ -49,179 +68,51 @@
                     <table>
                     <tbody>
                     <tr>
-            
-                    <td class="y-date">
-                        <div class="y-day">1</div>
-                    </td>
-            
-                    <td class="y-date">
-                        <div class="y-day">1</div>
-                    </td>
-            
-                    <td class="y-date">
-                        <div class="y-day">1</div>
-                    </td>
-            
-                    <td class="y-date">
-                        <div class="y-day">1</div>
-                    </td>
-            
-                    <td class="y-date">
-                        <div class="y-day">1</div>
-                    </td>
-            
-                    <td class="y-date">
-                            <div class="y-day">1</div>
-                    </td>
-            
-                    <td class="y-date">
-                            <div class="y-day">1</div>
-                    </td>
-            
+                        {% for i in month_info.first_day %}
+                        <td class="y-date"> 
+                        </td>
+                        {% endfor %}
+
+
+
+
+                        {% for i in month_info.cur_num_days %}
+
+                                {% if month_info.today_day == forloop.counter and month_info.cur_month == month_info.today_month and month_info.cur_year == month_info.today_year %}
+                                        <td class="y-today">
+                                {% elif event.date_time.day == forloop.parentloop.counter and event.date_time.month == month_info.cur_month and event.date_time.year == month_info.cur_year %}        
+                                        <td class="y-today">    
+                                {% else %}
+
+                                        <td class="y-date">
+                                {% endif %}
+
+                                <div class="y-day">{{forloop.counter}}</div>
+
+                                {% if forloop.counter|add:month_info.num_day|divisibleby:7%}
+                                        </tr><tr>
+                                {% endif %}
+                                
+                        {% endfor %}
+
+
+
+
                     </tr>
-            
-            
-            
-                    <tr>
-            
-                            <td class="y-date">
-                                    <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                    <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                            </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-today">
-                                            <div class="y-day">12</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>        
-                    </tr>
-            
-            
-            
-                    <tr>
-            
-                            <td class="y-date">
-                                    <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                    <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                            </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                    </tr>
-            
-            
-            
-                    <tr>
-            
-                            <td class="y-date">
-                                    <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                    <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                            </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                    </tr>
-            
-            
-            
-                    <tr>
-            
-                            <td class="y-date">
-                                    <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                    <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                            </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                            <div class="y-day">1</div>
-                                    </td>
-                            
-                                    <td class="y-date">
-                                    </td>
-                            
-                                    <td class="y-date">
-                                    </td>
-            
-                    </tr>
-            
+                    {% if month_info.row_six %}
+                        <tr><td class="y-date"></td></tr>
+                    {% endif %}
                     </tbody>
                     </table>
                     </div>
         </td>
+        
         {% if forloop.counter|divisibleby:4%}
             </tr><tr>
         {%endif%}
     {%endfor %}
-</table>
 
-    
+</table>
 
 <!-- end of days calendar -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -229,11 +120,11 @@
 
   $(document).ready(function(){
     $(".next").click(function(){
-      window.location.href = "{% url 'mainPage:nextView' view=n_view year=n_year month=n_month day=n_day %}";
+      window.location.href = "{% url 'mainPage:nextView' view='year' year=n_year month=n_month day=n_day %}";
 
   });
     $(".prev").click(function(){
-      window.location.href = "{% url 'mainPage:prevView' view=n_view year=n_year month=n_month day=n_day %}";  
+      window.location.href = "{% url 'mainPage:prevView' view='year' year=n_year month=n_month day=n_day %}";  
   });
   $(".today-button").click(function(){
         window.location.href = "{% url 'mainPage:currentTime' %}";   

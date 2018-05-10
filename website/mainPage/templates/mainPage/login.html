@@ -10,7 +10,9 @@
 
         h1 {
             text-align: center;
-            padding: 50px;
+            padding-top: 140px;
+            margin-bottom: 40px;
+            margin-left: auto;
             font-weight: lighter;
             color: #fff;
         }
@@ -18,8 +20,8 @@
         .login {
             margin: auto;
             background-color: coral;
-            width: 30%;
-            height: 50%;
+            width: 500px;
+            height: 600px;
             align-content: center;
         }
 
@@ -32,18 +34,63 @@
         form {
             display: block;
             margin-top: 30px;
-        }
-
-        .btn-light {
+        }    
+        
+        .btn-login { 
             display: block;
             width: 160px;
             height: 45px;
-            text-transform: uppercase;
-            color: coral;
-            background-color: #fff;
             font-weight: bold;
             font-size: 15px;
-            margin-top: 30px;
+            margin-top: 40px;  
+            text-transform: uppercase;
+            color: #FF7F50; 
+            background-color: #FFFFFF; 
+            border-color: #FFFFFF; 
+        } 
+        
+        .btn-login:hover, 
+        .btn-login:focus, 
+        .btn-login:active, 
+        .btn-login.active, 
+        .open .dropdown-toggle.btn-login { 
+            color: #ffffff; 
+            background-color: #E3683B; 
+            border-color: #FF7F50; 
+        } 
+        
+        .btn-login:active, 
+        .btn-login.active, 
+        .open .dropdown-toggle.btn-login { 
+            background-image: none; 
+        } 
+        
+        .btn-login.disabled, 
+        .btn-login[disabled], 
+        fieldset[disabled] .btn-login, 
+        .btn-login.disabled:hover, 
+        .btn-login[disabled]:hover, 
+        fieldset[disabled] .btn-login:hover, 
+        .btn-login.disabled:focus, 
+        .btn-login[disabled]:focus, 
+        fieldset[disabled] .btn-login:focus, 
+        .btn-login.disabled:active, 
+        .btn-login[disabled]:active, 
+        fieldset[disabled] .btn-login:active, 
+        .btn-login.disabled.active, 
+        .btn-login[disabled].active, 
+        fieldset[disabled] .btn-login.active { 
+            background-color: #FF7F50; 
+            border-color: #FF7F50; 
+        } 
+        
+        .btn-login .badge { 
+            color: #FFFFFF; 
+            background-color: #FF7F50; 
+        }
+                                                         
+        .login-form {                        
+            font-size: 18px;
         }
 
 </style>
@@ -57,8 +104,8 @@
             <h1>Sign In</h1>
             <form method="post">
                 {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-light">Sign In</button>
+                <div class="login-form">{{form.as_p}}</div>
+                <button type="submit" class="btn btn-login">Sign In</button>
             </form>
             </center>
         </div>

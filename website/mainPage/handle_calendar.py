@@ -27,7 +27,8 @@ def get_calendar_variables(c_year = 0, c_month = 0, c_week = 0):
     'cur_name_of_day' : datetime.datetime.now().strftime("%A"),
     'first_day':range(first_day-1),
     'num_day': first_day - 1,
-    'remainder': (8-first_day)
+    'remainder': (8-first_day),
+    'row_six': (calendar.monthrange(year,month)[1] + first_day - 1) <= 35,
     }
     
     return info_dict
@@ -35,6 +36,10 @@ def get_calendar_variables(c_year = 0, c_month = 0, c_week = 0):
 def handle_year_info(year):
     return_dict = {}
     for i in range(12):
-        info = get_calendar_variables(2018,i+1,0)
+        info = get_calendar_variables(c_year = year, c_month = i+1)
+
         return_dict[info['cur_name_of_month']] = info
+
+
+    print(return_dict['March'])
     return return_dict

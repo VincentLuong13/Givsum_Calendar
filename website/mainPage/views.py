@@ -83,6 +83,9 @@ def nextView(request, view, year, month, day):
         else:
             month += 1
         day = 1 #sets the day to 1 just to be sure that the date is a valid day
+    
+    if view == 'year':
+        return HttpResponseRedirect('/calendarpage/year/' + str(year + 1))
 
     return HttpResponseRedirect('/' + str(view) + '/' + str(year) + '-' + str(month) + '-' + str(day) + '/') #month/2018-06-12 -> month/2018/07/01
 
@@ -99,6 +102,11 @@ def prevView(request,view, year, month, day):
             month -= 1
         day = 1 #makes sure that the day is a vali date
 
+    if view == 'year':
+        return HttpResponseRedirect('/calendarpage/year/' + str(year - 1))
+    
+
+
     return HttpResponseRedirect('/' + str(view) + '/' + str(year) + '-' + str(month) + '-' + str(day) + '/') #month/2018-06-12 -> month/2018-05-01
 
 def resetToCurrent(request):
@@ -107,17 +115,17 @@ def resetToCurrent(request):
     '''
     return HttpResponseRedirect('/calendarpage')
 
-def yearview(request):
+def yearview(request, year = datetime.datetime.today().year):
     today_date = datetime.datetime.today()
-    cal_var = get_calendar_variables(c_month = today_date.month, c_year = today_date.year) #retrieves all the variables for the current calendar month/year
+    cal_var = get_calendar_variables(c_month = today_date.month, c_year = year) #retrieves all the variables for the current calendar month/year
 
-    data = {'n_view': 'month', 'n_year': today_date.year, 'n_month': today_date.month, 'n_day': today_date.day} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
-    events = Event.objects.filter(date_time__year = cal_var["cur_year"])
+    data = {'n_view': 'month', 'n_year': year, 'n_month': today_date.month, 'n_day': today_date.day} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
+    events = Event.objects.filter(date_time__year = year)
 
     insert_dict = {'events': sorted(events,key = lambda x: x.date_time)} #creates a dictionary with the events in the current month
 
     insert_dict.update(cal_var) #adds the calendar variables into the dictionary that will passed onto html
     insert_dict.update(data) #adds needed data into the dictionary that will passed onto html
-    insert_dict['year_info'] = handle_year_info(2018)#gets information for year
-
+    insert_dict['year_info'] = handle_year_info(year)#gets information for year
+    insert_dict['heat_map'] = {1:'#ffffb2',5:'#fed976',10:'#feb24c',15:'#fd8d3c',20:'#f03b20',25:'#bd0026'}
     return render(request,'mainPage/yearCal.html',insert_dict)
