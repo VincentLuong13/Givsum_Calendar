@@ -41,5 +41,4 @@ def handle_year_info(year):
         return_dict[info['cur_name_of_month']] = info
 
 
-    print(return_dict['March'])
     return return_dict

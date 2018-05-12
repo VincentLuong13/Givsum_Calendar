@@ -121,11 +121,19 @@ def yearview(request, year = datetime.datetime.today().year):
 
     data = {'n_view': 'month', 'n_year': year, 'n_month': today_date.month, 'n_day': today_date.day} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
     events = Event.objects.filter(date_time__year = year)
-
     insert_dict = {'events': sorted(events,key = lambda x: x.date_time)} #creates a dictionary with the events in the current month
-
     insert_dict.update(cal_var) #adds the calendar variables into the dictionary that will passed onto html
     insert_dict.update(data) #adds needed data into the dictionary that will passed onto html
     insert_dict['year_info'] = handle_year_info(year)#gets information for year
+
+    month_counter=1
+    for month in insert_dict['year_info'].keys():
+        insert_dict['year_info'][month]['day_distribution'] = {}
+        for day in (insert_dict['year_info'][month]['cur_num_days']):
+            temp_events = Event.objects.filter(date_time__year = year).filter(date_time__month = month_counter).filter(date_time__day = day+1)
+            insert_dict['year_info'][month]['day_distribution'][day+1] = [temp_events,len(temp_events)]
+        month_counter+=1
+            
+
     insert_dict['heat_map'] = {1:'#ffffb2',5:'#fed976',10:'#feb24c',15:'#fd8d3c',20:'#f03b20',25:'#bd0026'}
     return render(request,'mainPage/yearCal.html',insert_dict)

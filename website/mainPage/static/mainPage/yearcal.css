@@ -61,9 +61,16 @@ table {
 }
 
 .y-today .y-day {
-    background-color: pink; 
+    background-color: coral; 
     color: white;
     border-radius: 50%;
+}
+
+.y-today .y-heat{
+    background-color:red; 
+    color: white;
+    border-radius: 50%;
+
 }
 
 .y-events {

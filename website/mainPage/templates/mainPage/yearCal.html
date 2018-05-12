@@ -2,7 +2,7 @@
 {% block head %}
     {% load static %}
     <link rel='stylesheet' href = "{% static 'mainPage/calendarPage.css' %}">
-    <link rel='stylesheet' href = "{% static 'mainPage/yearcal.css' %}">
+    <link rel='stylesheet' href = "{% static 'mainPage/yearCal.css' %}">
 {% endblock %}
 {% block right %}
 <!-- start of calendar -->
@@ -10,12 +10,12 @@
         <!-- start drop down menu -->
         <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle float-left" style="background-color: coral; border: coral; color: white;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                MONTH
+                YEAR
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">WEEK</a>
-                <a class="dropdown-item" href="#">MONTH</a>
-                <a class="dropdown-item active" href="/calendarpage/year/">YEAR</a>
+                <a class="dropdown-item" href="/calendarpage/">MONTH</a>
+                <a class="dropdown-item" href="/calendarpage/year/">YEAR</a>
         </div>
         </div>
         <!-- end drop down menu -->     
@@ -76,12 +76,12 @@
 
 
 
-                        {% for i in month_info.cur_num_days %}
-
+                        {% for day_num,event_info in month_info.day_distribution.items %}
+                                
                                 {% if month_info.today_day == forloop.counter and month_info.cur_month == month_info.today_month and month_info.cur_year == month_info.today_year %}
-                                        <td class="y-today">
-                                {% elif event.date_time.day == forloop.parentloop.counter and event.date_time.month == month_info.cur_month and event.date_time.year == month_info.cur_year %}        
-                                        <td class="y-today">    
+                                        <td class="y-today" >
+                                {% elif event_info.1 > 0 %}        
+                                        <td class=" y-today y-heat" >
                                 {% else %}
 
                                         <td class="y-date">
