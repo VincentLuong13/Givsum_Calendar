@@ -26,6 +26,8 @@ class Event(models.Model):
 
 
 class Atendee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User,related_name='profile',on_delete=models.CASCADE)
     bio =  models.CharField(default = '' ,max_length = 3000)
     events = models.ManyToManyField(Event,related_name='atendees')
+    friends = models.ManyToManyField('self',related_name='friends')
+

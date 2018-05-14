@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Organization, Event
+from .models import Organization, Event,Atendee
 import datetime
 import calendar
 from collections import defaultdict
@@ -7,6 +7,7 @@ from .handle_calendar import get_calendar_variables,handle_year_info
 from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponseRedirect
+
 
     
 global cal_month
@@ -22,6 +23,53 @@ def index(request):
     event_dict = defaultdict(list)
     events = Event.objects.all()
 
+    # dictionary key = dates, values = list of events
+    for ev in sorted(events,key = lambda x: x.date_time):
+        event_dict[str(ev.date_time.strftime("%A"))+ 
+        ', ' + str(ev.date_time.strftime("%B")) + 
+        ' '+str(ev.date_time.day) +', '+ str(ev.date_time.year)].append([ev,len(ev.atendees.all())])#len just for testing for number of attendees
+    month_template = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}
+    
+    insert_dict = {'ev_dict': dict(event_dict),'months': month_template}
+    insert_dict.update(get_calendar_variables())
+    return render(request,'mainPage/index.html',insert_dict)
+    
+def myEvents(request):
+    '''
+    The index is basically the main page of our website. It creates a dictionary of events and then sorts all events by date. It sends all the events 
+    to be viewed in a schedule-type view.
+    '''
+    event_dict = defaultdict(list)
+    try:
+        events = request.user.profile.events.all()
+    except:
+        events = []
+    # dictionary key = dates, values = list of events
+    for ev in sorted(events,key = lambda x: x.date_time):
+        event_dict[str(ev.date_time.strftime("%A"))+ 
+        ', ' + str(ev.date_time.strftime("%B")) + 
+        ' '+str(ev.date_time.day) +', '+ str(ev.date_time.year)].append([ev,len(ev.atendees.all())])#len just for testing for number of attendees
+    month_template = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}
+    
+    insert_dict = {'ev_dict': dict(event_dict),'months': month_template}
+    insert_dict.update(get_calendar_variables())
+    return render(request,'mainPage/index.html',insert_dict)
+
+def friendEvents(request):
+    '''
+    The index is basically the main page of our website. It creates a dictionary of events and then sorts all events by date. It sends all the events 
+    to be viewed in a schedule-type view.
+    '''
+    event_dict = defaultdict(list)
+    events = Event.objects.none()
+    try:
+        friends = request.user.profile.friends.all()
+        for friend in friends:
+            events = events|friend.events.all()
+        events = events.distinct()
+                
+    except:
+        events = []
     # dictionary key = dates, values = list of events
     for ev in sorted(events,key = lambda x: x.date_time):
         event_dict[str(ev.date_time.strftime("%A"))+ 
