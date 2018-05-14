@@ -88,17 +88,17 @@
                     </div>
 
                     <div class="btn-group btn-group-toggle btn-group-vertical filters" data-toggle="buttons">
-                        <label class="btn btn-light active" >
-                            <input type="radio" name="options" id="option1" autocomplete="off"> All Events
+                        <label class="btn btn-light active all-events" >
+                            <input type="radio" name="options1" id="option1" autocomplete="off"> All Events
                         </label>
-                        <label class="btn btn-light"  >
-                            <input type="radio" name="options" id="option2" autocomplete="off"> My Events
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="options" id="option3" autocomplete="off"> On Going Events
+                        <label class="btn btn-light my-events"  >
+                            <input type="radio" name="options2" id="option2" autocomplete="off"> My Events
                         </label>
                         <label class="btn btn-light">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Friend's Events
+                            <input type="radio" name="options3" id="option3" autocomplete="off"> On Going Events
+                        </label>
+                        <label class="btn btn-light friend-events">
+                                <input type="radio" name="options4" id="option3" autocomplete="off"> Friend's Events
                         </label>
                     </div>
             </div>
@@ -109,6 +109,24 @@
                 {% endblock %}
                 </div>
             </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script>
+            
+              $(document).ready(function(){
+                $(".all-events").click(function(){
+                  window.location.href = "{% url 'mainPage:schedule' %}";
+            
+              });
+                $(".my-events").click(function(){
+                    window.location.href = "{% url 'mainPage:myevents' %}";  
+              });
+
+                $(".friend-events").click(function(){
+                    window.location.href = "{% url 'mainPage:friendevents' %}";  
+              });
+            })
+        </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
