@@ -120,15 +120,27 @@
 
   $(document).ready(function(){
     $(".next").click(function(){
-      window.location.href = "{% url 'mainPage:nextView' view='year' year=n_year month=n_month day=n_day %}";
+      window.location.href = "{% url 'mainPage:nextView' view='year' year=n_year month=n_month day=n_day filter=n_filter%}";
 
   });
     $(".prev").click(function(){
-      window.location.href = "{% url 'mainPage:prevView' view='year' year=n_year month=n_month day=n_day %}";  
+      window.location.href = "{% url 'mainPage:prevView' view='year' year=n_year month=n_month day=n_day filter=n_filter %}";  
   });
   $(".today-button").click(function(){
         window.location.href = "{% url 'mainPage:currentTime' %}";   
   });
+  $(".all-events").click(function(){
+      window.location.href = "{% url 'mainPage:yearview2'  filter='all' year=n_year %}";
+
+    });
+  $(".my-events").click(function(){
+      window.location.href = "{% url 'mainPage:yearview2'  filter='myevents' year=n_year %}";
+
+    });
+  $(".friend-events").click(function(){
+      window.location.href = "{% url 'mainPage:yearview2'  filter='friends' year=n_year %}";
+
+    });
 })
 </script>
 

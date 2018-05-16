@@ -53,18 +53,37 @@ def scheduletemplate(request,events,event_dict):
     insert_dict.update(get_calendar_variables())
     return render(request,'mainPage/index.html',insert_dict)
 
-def calendarPage(request):
+def calendarPage(request, filter = 'all'):
     '''
     This calendar page is the base calendar page. Redirecting to this page will bring you to the calendar view with default view month and will show you
     the current month. It works by taking in events that only take place in the current month, the amount of days in the month, and which day the month starts on
     and then sends those events to calendarPage.html to create the calendar view.
     '''
+    # event_dict = defaultdict(list)
+    if filter == 'all':
+        events = Event.objects.all()
+    elif filter == 'myevents':
+        try:
+            events = request.user.profile.events.all()
+        except:
+            events = []
+
+    elif filter == 'friends':
+        events = Event.objects.none()
+        try:
+            friends = request.user.profile.friends.all()
+            for friend in friends:
+                events = events|friend.events.all()
+            events = events.distinct()
+                    
+        except:
+            events = []
 
     today_date = datetime.datetime.today()
     cal_var = get_calendar_variables(c_month = today_date.month, c_year = today_date.year) #retrieves all the variables for the current calendar month/year
 
-    data = {'n_view': 'month', 'n_year': today_date.year, 'n_month': today_date.month, 'n_day': today_date.day} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
-    events = Event.objects.filter(date_time__month = cal_var["cur_month"])
+    data = {'n_view': 'month', 'n_year': today_date.year, 'n_month': today_date.month, 'n_day': today_date.day,'n_filter':filter} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
+    events = events.filter(date_time__month = cal_var["cur_month"])
 
     insert_dict = {'events': sorted(events,key = lambda x: x.date_time)} #creates a dictionary with the events in the current month
 
@@ -74,23 +93,42 @@ def calendarPage(request):
 
     return render(request,'mainPage/calendarPage.html',insert_dict) #creates the calendar view using the insert dict
 
-def cal(request, view, year, month, day):
+def cal(request, view, year, month, day,filter ='all'):
     '''
     The cal view is used for displaying views on the calendar using specific dates in the past or in the future.
     It works by taking in the desired view type, the year, the month, and the day, and then does the same thing calendarPage does except
     it uses the variables for the desired month/year/week instead of the the current date's variables.
     '''
+    if filter == 'all':
+        events = Event.objects.all()
+    elif filter == 'myevents':
+        try:
+            events = request.user.profile.events.all()
+        except:
+            events = []
+
+    elif filter == 'friends':
+        events = Event.objects.none()
+        try:
+            friends = request.user.profile.friends.all()
+            for friend in friends:
+                events = events|friend.events.all()
+            events = events.distinct()
+                    
+        except:
+            events = []
     if view == 'month':
+
         cal_var = get_calendar_variables(c_month = int(month), c_year = int(year)) #creates a cal_var using the desired month/year
 
-        events = Event.objects.filter(date_time__month = cal_var["cur_month"])
+        events = events.filter(date_time__month = cal_var["cur_month"])
         insert_dict = {'events': sorted(events,key = lambda x: x.date_time)}
         insert_dict.update(cal_var)
-        data = {'n_view': view, 'n_year': year, 'n_month': month, 'n_day': day}
+        data = {'n_view': view, 'n_year': year, 'n_month': month, 'n_day': day,'n_filter':filter}
         insert_dict.update(data)
     return render(request,'mainPage/calendarPage.html', insert_dict)
 
-def nextView(request, view, year, month, day):
+def nextView(request, view, year, month, day,filter):
     '''
     The nextView function is used to increment views. It takes in the parameters view, year, month, and day and will increment the days/month/year depending on 
     the desired view.
@@ -104,11 +142,10 @@ def nextView(request, view, year, month, day):
         day = 1 #sets the day to 1 just to be sure that the date is a valid day
     
     if view == 'year':
-        return HttpResponseRedirect('/calendarpage/year/' + str(year + 1))
+        return HttpResponseRedirect('/calendarpage/year/' + str(year + 1) + '/filters='+str(filter) + '/')
+    return HttpResponseRedirect('/' + str(view) + '/' + str(year) + '-' + str(month) + '-' + str(day) + '/filters=' +str(filter) + '/') #month/2018-06-12 -> month/2018/07/01
 
-    return HttpResponseRedirect('/' + str(view) + '/' + str(year) + '-' + str(month) + '-' + str(day) + '/') #month/2018-06-12 -> month/2018/07/01
-
-def prevView(request,view, year, month, day):
+def prevView(request,view, year, month, day,filter):
     '''
     The prevView function is used to decrement views. It takes in the parameters view, year, month, and day and will decrement the days/month/year depending on
     the desired view
@@ -122,11 +159,9 @@ def prevView(request,view, year, month, day):
         day = 1 #makes sure that the day is a vali date
 
     if view == 'year':
-        return HttpResponseRedirect('/calendarpage/year/' + str(year - 1))
+        return HttpResponseRedirect('/calendarpage/year/' + str(year - 1) + '/filters='+str(filter) + '/')
     
-
-
-    return HttpResponseRedirect('/' + str(view) + '/' + str(year) + '-' + str(month) + '-' + str(day) + '/') #month/2018-06-12 -> month/2018-05-01
+    return HttpResponseRedirect('/' + str(view) + '/' + str(year) + '-' + str(month) + '-' + str(day) + '/filters='+str(filter) + '/') #month/2018-06-12 -> month/2018-05-01
 
 def resetToCurrent(request):
     '''
@@ -134,12 +169,30 @@ def resetToCurrent(request):
     '''
     return HttpResponseRedirect('/calendarpage')
 
-def yearview(request, year = datetime.datetime.today().year):
+def yearview(request, year = datetime.datetime.today().year,filter = 'all'):
+    if filter == 'all':
+        events = Event.objects.all()
+    elif filter == 'myevents':
+        try:
+            events = request.user.profile.events.all()
+        except:
+            events = []
+
+    elif filter == 'friends':
+        events = Event.objects.none()
+        try:
+            friends = request.user.profile.friends.all()
+            for friend in friends:
+                events = events|friend.events.all()
+            events = events.distinct()
+                    
+        except:
+            events = []
     today_date = datetime.datetime.today()
     cal_var = get_calendar_variables(c_month = today_date.month, c_year = year) #retrieves all the variables for the current calendar month/year
 
-    data = {'n_view': 'month', 'n_year': year, 'n_month': today_date.month, 'n_day': today_date.day} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
-    events = Event.objects.filter(date_time__year = year)
+    data = {'n_view': 'month', 'n_year': year, 'n_month': today_date.month, 'n_day': today_date.day,'n_filter':filter} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
+    events = events.filter(date_time__year = year)
     insert_dict = {'events': sorted(events,key = lambda x: x.date_time)} #creates a dictionary with the events in the current month
     insert_dict.update(cal_var) #adds the calendar variables into the dictionary that will passed onto html
     insert_dict.update(data) #adds needed data into the dictionary that will passed onto html
@@ -149,7 +202,7 @@ def yearview(request, year = datetime.datetime.today().year):
     for month in insert_dict['year_info'].keys():
         insert_dict['year_info'][month]['day_distribution'] = {}
         for day in (insert_dict['year_info'][month]['cur_num_days']):
-            temp_events = Event.objects.filter(date_time__year = year).filter(date_time__month = month_counter).filter(date_time__day = day+1)
+            temp_events = events.filter(date_time__year = year).filter(date_time__month = month_counter).filter(date_time__day = day+1)
             insert_dict['year_info'][month]['day_distribution'][day+1] = [temp_events,len(temp_events)]
         month_counter+=1
             

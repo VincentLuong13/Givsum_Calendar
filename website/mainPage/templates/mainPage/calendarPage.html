@@ -14,7 +14,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="#">WEEK</a>
         <a class="dropdown-item active" href="#">MONTH</a>
-        <a class="dropdown-item" href="/calendarpage/year/">YEAR</a>
+        <a class="dropdown-item" href="/calendarpage/year/filters=all/">YEAR</a>
     </div>
     </div>
     <!-- end drop down menu -->     
@@ -97,16 +97,27 @@
     //   })
 
     $(document).ready(function(){
-      $(".next").click(function(){
-        window.location.href = "{% url 'mainPage:nextView' view=n_view year=n_year month=n_month day=n_day %}";
- 
+        $(".next").click(function(){
+        window.location.href = "{% url 'mainPage:nextView' view=n_view year=n_year month=n_month day=n_day filter=n_filter %}";
+
     });
-      $(".prev").click(function(){
-        window.location.href = "{% url 'mainPage:prevView' view=n_view year=n_year month=n_month day=n_day %}";  
+        $(".prev").click(function(){
+        window.location.href = "{% url 'mainPage:prevView' view=n_view year=n_year month=n_month day=n_day filter=n_filter%}";  
     });
     $(".today-button").click(function(){
           window.location.href = "{% url 'mainPage:currentTime' %}";   
     });
+    $(".all-events").click(function(){
+      window.location.href = "{% url 'mainPage:calendarpage' filter='all' %}";
+
+    });
+    $(".my-events").click(function(){
+        window.location.href = "{% url 'mainPage:calendarpage' filter='myevents' %}";  
+    });
+
+    $(".friend-events").click(function(){
+        window.location.href = "{% url 'mainPage:calendarpage' filter='friends' %}";  
+  });
  })
   </script>
 
