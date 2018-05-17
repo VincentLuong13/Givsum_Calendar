@@ -80,14 +80,39 @@
                                 
                                 {% if month_info.today_day == forloop.counter and month_info.cur_month == month_info.today_month and month_info.cur_year == month_info.today_year %}
                                         <td class="y-today" >
+                                                <div class="y-day" data-html="true" style="background-color:coral;"><a href="#" data-html="true" data-toggle="popover" data-trigger="focus" title="{{month_info.cur_name_of_month}} {{forloop.counter}}, {{month_info.cur_year}}" data-content="
+                                                    {% for event in event_info.0 %}
+                                                        {% if event.date_time.minute  == 0 %}
+                                                            {{event.date_time.hour}}:{{event.date_time.minute}}0
+                                                        {%elif event.date_time.minute < 10 %}
+                                                            {{event.date_time.hour}}:0{{event.date_time.minute}}
+                                                        {% else %}
+                                                            {{event.date_time.hour}}:{{event.date_time.minute}}
+                                                        {% endif %}                                                
+                                                    : {{event.name}}
+                                                    <br>
+                                                    {% endfor %}
+                                                    ">{{forloop.counter}}</a></div>
                                 {% elif event_info.1 > 0 %}        
                                         <td class=" y-today y-heat" >
+                                            <div class="y-day" data-html="true" style="background-color: {% if event_info.1 > 1 %} lightblue {% else %} pink {% endif %};"><a href="#" data-html="true" data-toggle="popover" data-trigger="focus" title="{{month_info.cur_name_of_month}} {{forloop.counter}}, {{month_info.cur_year}}" data-content="
+                                                {% for event in event_info.0 %}
+                                                    {% if event.date_time.minute  == 0 %}
+                                                        {{event.date_time.hour}}:{{event.date_time.minute}}0
+                                                    {%elif event.date_time.minute < 10 %}
+                                                        {{event.date_time.hour}}:0{{event.date_time.minute}}
+                                                    {% else %}
+                                                        {{event.date_time.hour}}:{{event.date_time.minute}}
+                                                    {% endif %}                                                
+                                                : {{event.name}}
+                                                <br>
+                                                {% endfor %}
+                                                ">{{forloop.counter}}</a></div>
                                 {% else %}
-
                                         <td class="y-date">
+                                            <div class="y-day">{{forloop.counter}}</div>
                                 {% endif %}
 
-                                <div class="y-day">{{forloop.counter}}</div>
 
                                 {% if forloop.counter|add:month_info.num_day|divisibleby:7%}
                                         </tr><tr>
@@ -142,6 +167,15 @@
 
     });
 })
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+})
+
 </script>
 
 

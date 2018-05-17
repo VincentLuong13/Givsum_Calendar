@@ -61,7 +61,7 @@ table {
 }
 
 .y-today .y-day {
-    background-color: coral; 
+    background-color: red; 
     color: white;
     border-radius: 50%;
 }
