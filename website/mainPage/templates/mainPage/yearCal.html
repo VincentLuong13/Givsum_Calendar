@@ -142,7 +142,14 @@
 <!-- end of days calendar -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-
+  if(localStorage.getItem("select")=="allEvents"){
+      $(".all-events").addClass("active");
+  }else if(localStorage.getItem("select")=="myEvents"){
+    $(".my-events").addClass("active");
+  }else if(localStorage.getItem("select")=="friendEvents"){
+    $(".friend-events").addClass("active");
+  }
+  
   $(document).ready(function(){
     $(".next").click(function(){
       window.location.href = "{% url 'mainPage:nextView' view='year' year=n_year month=n_month day=n_day filter=n_filter%}";
@@ -155,14 +162,20 @@
         window.location.href = "{% url 'mainPage:currentTime' %}";   
   });
   $(".all-events").click(function(){
+      selected = "allEvents";
+      localStorage.setItem("select",selected);
       window.location.href = "{% url 'mainPage:yearview2'  filter='all' year=n_year %}";
 
     });
   $(".my-events").click(function(){
+      selected = "myEvents";
+      localStorage.setItem("select",selected);
       window.location.href = "{% url 'mainPage:yearview2'  filter='myevents' year=n_year %}";
 
     });
   $(".friend-events").click(function(){
+      selected = "friendEvents";
+      localStorage.setItem("select",selected);
       window.location.href = "{% url 'mainPage:yearview2'  filter='friends' year=n_year %}";
 
     });
