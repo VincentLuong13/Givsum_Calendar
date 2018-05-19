@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Organization, Event,Atendee
+from django.contrib.auth.models import User
 import datetime
 import calendar
 from collections import defaultdict
@@ -7,6 +8,7 @@ from .handle_calendar import get_calendar_variables,handle_year_info
 from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
     
@@ -209,3 +211,18 @@ def yearview(request, year = datetime.datetime.today().year,filter = 'all'):
 
     insert_dict['heat_map'] = {1:'#ffffb2',5:'#fed976',10:'#feb24c',15:'#fd8d3c',20:'#f03b20',25:'#bd0026'}
     return render(request,'mainPage/yearCal.html',insert_dict)
+
+def rsvp(request, event):
+
+    user = Atendee.objects.get(user = request.user)
+
+    try:
+        select = user.events.get(id = event)
+    except:
+        select = None
+    
+    if select:
+        user.events.remove(event)
+    else:
+        user.events.add(event)
+    return HttpResponseRedirect('/schedulepage/')

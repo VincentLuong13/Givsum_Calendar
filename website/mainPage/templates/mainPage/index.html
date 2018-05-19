@@ -41,10 +41,10 @@
                     <div id="description">{{event.0.event_description}}</div>
                     <button href="#" tabindex="0" data-toggle="popover" data-trigger="focus" class="btn btn-sm btn-people" data-html="true" title="Attendees" data-content="
                     {% for person in event.2 %}
-                    {{person}} <BR>
+                    {{person.user.first_name}} <BR>
                     {% endfor %}
                     "><i class="fas fa-users"></i>&nbsp;&nbsp;{{event.1}} Attendees</button>
-                    <button href="#" class="btn btn-sm btn-people"><i class="far fa-calendar-check"></i>&nbsp;&nbsp;RSVP</button>
+                    <button onclick=window.location.href="{% url 'mainPage:rsvp' event.0.id %}"; class="btn btn-sm btn-people"><i class="far fa-calendar-check"></i>&nbsp;&nbsp;RSVP</button>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
     $(".friend-events").addClass("active");
   }
 //add on going later
-  
+
   $(document).ready(function(){
     $(".all-events").click(function(){
       selected = "allEvents";

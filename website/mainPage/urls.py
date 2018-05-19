@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, re_path
 from . import views
+from .models import Organization, Event, Atendee
 from django.contrib.auth.views import login
 
 app_name = "mainPage"
@@ -20,5 +21,5 @@ urlpatterns = [
     #re_path(r'^schedulepage\/filter=(?P<filter>all|myevents|friend)/$', views.schedulepage, name = "schedulepage"),
     path('schedulepage/filters=<str:filter>/', views.schedulepage, name = 'schedulepage'),
     path('calendarpage/filters=<str:filter>/',views.calendarPage , name = 'calendarpage'),
-
+    path('rsvp/<int:event>/', views.rsvp, name = "rsvp"),
 ]
