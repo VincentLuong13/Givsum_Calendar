@@ -22,4 +22,5 @@ urlpatterns = [
     path('schedulepage/filters=<str:filter>/', views.schedulepage, name = 'schedulepage'),
     path('calendarpage/filters=<str:filter>/',views.calendarPage , name = 'calendarpage'),
     path('rsvp/<int:event>/', views.rsvp, name = "rsvp"),
+    path('calendarpage/week/', views.weekview, name = 'weekview'),
 ]

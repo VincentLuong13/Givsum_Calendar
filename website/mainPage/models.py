@@ -19,6 +19,7 @@ class Event(models.Model):
     address = models.CharField(default = '' ,max_length = 750)
     picture_url = models.CharField(default = '' ,max_length = 3000)
     event_url = models.CharField(default = '' ,max_length = 3000)
+    on_going = models.BooleanField(default = False)
 
 
     def __str__(self):

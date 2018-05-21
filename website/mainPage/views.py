@@ -227,3 +227,6 @@ def rsvp(request, event):
     else:
         user.events.add(event)
     return HttpResponseRedirect('/schedulepage/')
+
+def weekview(request):
+    return render(request,'mainPage/weekPage.html')
