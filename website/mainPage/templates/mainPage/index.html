@@ -44,7 +44,11 @@
                     {{person.user.first_name}} <BR>
                     {% endfor %}
                     "><i class="fas fa-users"></i>&nbsp;&nbsp;{{event.1}} Attendees</button>
+                    {% if event.3 %}
+                    <button onclick=window.location.href="{% url 'mainPage:rsvp' event.0.id %}"; class="btn btn-sm btn-people"><i class="far fa-calendar-check"></i>&nbsp;&nbsp;Remove RSVP</button>
+                    {%else%}
                     <button onclick=window.location.href="{% url 'mainPage:rsvp' event.0.id %}"; class="btn btn-sm btn-people"><i class="far fa-calendar-check"></i>&nbsp;&nbsp;RSVP</button>
+                    {% endif %}
                 </div>
             </div>
         </div>

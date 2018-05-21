@@ -44,11 +44,12 @@ def schedulepage(request, filter = "all"):
 
     return scheduletemplate(request,events,event_dict)
 def scheduletemplate(request,events,event_dict):
+    user = request.user.profile
     # dictionary key = dates, values = list of events
     for ev in sorted(events,key = lambda x: x.date_time):
         event_dict[str(ev.date_time.strftime("%A"))+ 
         ', ' + str(ev.date_time.strftime("%B")) + 
-        ' '+str(ev.date_time.day) +', '+ str(ev.date_time.year)].append([ev,len(ev.atendees.all()),ev.atendees.all()])#len just for testing for number of attendees
+        ' '+str(ev.date_time.day) +', '+ str(ev.date_time.year)].append([ev,len(ev.atendees.all()),ev.atendees.all(),(user in ev.atendees.all())])#len just for testing for number of attendees
     month_template = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}
     
     insert_dict = {'ev_dict': dict(event_dict),'months': month_template}
