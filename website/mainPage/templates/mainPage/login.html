@@ -1,9 +1,10 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <style>
         body{
             font-family: Helvetica;
-            font-size:30px;
+            font-size:28px;
             font-weight: lighter;
             color: #fff;
         }
@@ -101,6 +102,28 @@
         height: 150px; 
 }
 
+.field {
+    border: none;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    width: 300px;
+    color: grey;
+}
+
+.icon {
+    height: 47px;
+    width: 50px;
+    font-size: 20px;
+    padding-top: 12px;
+    background-color: white;
+    color: grey;
+}
+
+input:focus {
+    outline: none;
+}
 
 </style>
 </head>
@@ -115,11 +138,11 @@
                 {% csrf_token %}
                 <!-- <div class="login-form">{{form.as_p}}</div> -->
                 <div class="form-group">
-                    <input type="text" name="username" autofocus maxlength="254" required id="id_username" />
+                    <i class="fas fa-user icon"></i><input class="field" type="text" placeholder="Username" name="username" autofocus maxlength="254" required id="id_username" />
                   </div>
                   <div class="form-group" >
                       <!-- you just add a class to edit the form code for css -->
-                    <input type="password" name="password" required id="id_password" /> 
+                      <i class="fas fa-lock icon"></i><input class="field" type="password" placeholder="Password" name="password" required id="id_password" /> 
                   </div>
                 <button type="submit" class="btn btn-login">Sign In</button>
             </form>
