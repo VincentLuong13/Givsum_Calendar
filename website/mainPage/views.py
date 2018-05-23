@@ -201,16 +201,21 @@ def yearview(request, year = datetime.datetime.today().year,filter = 'all'):
     insert_dict.update(data) #adds needed data into the dictionary that will passed onto html
     insert_dict['year_info'] = handle_year_info(year)#gets information for year
 
+    heat_map = {'#feb24c':lambda x: x==1,'#fd8d3c':lambda x: x==2,'#f03b20':lambda x: x==3,'#bd0026' : lambda x: x==5}
+
     month_counter=1
     for month in insert_dict['year_info'].keys():
         insert_dict['year_info'][month]['day_distribution'] = {}
         for day in (insert_dict['year_info'][month]['cur_num_days']):
             temp_events = events.filter(date_time__year = year).filter(date_time__month = month_counter).filter(date_time__day = day+1)
-            insert_dict['year_info'][month]['day_distribution'][day+1] = [temp_events,len(temp_events)]
+            insert_dict['year_info'][month]['day_distribution'][day+1] = [temp_events,len(temp_events),[color for color in heat_map.keys() if heat_map[color]((len(temp_events)))]]
+            if (len(insert_dict['year_info'][month]['day_distribution'][day+1][2])>=1):
+                insert_dict['year_info'][month]['day_distribution'][day+1][2]  = insert_dict['year_info'][month]['day_distribution'][day+1][2][0]
+            
         month_counter+=1
             
 
-    insert_dict['heat_map'] = {1:'#ffffb2',5:'#fed976',10:'#feb24c',15:'#fd8d3c',20:'#f03b20',25:'#bd0026'}
+    
     return render(request,'mainPage/yearCal.html',insert_dict)
 
 def rsvp(request, event):
