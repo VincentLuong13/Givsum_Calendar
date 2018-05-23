@@ -238,5 +238,37 @@ def rsvp(request, event):
         user.events.add(event)
     return HttpResponseRedirect('/schedulepage/')
 
-def weekview(request):
-    return render(request,'mainPage/weekPage.html')
+def weekview(request,filter = 'all'):
+    if filter == 'all':
+        events = Event.objects.all()
+    elif filter == 'myevents':
+        try:
+            events = request.user.profile.events.all()
+        except:
+            events = []
+
+    elif filter == 'friends':
+        events = Event.objects.none()
+        try:
+            friends = request.user.profile.friends.all()
+            for friend in friends:
+                events = events|friend.events.all()
+            events = events.distinct()
+                    
+        except:
+            events = []
+
+    today_date = datetime.datetime.today()
+    cal_var = get_calendar_variables(c_month = today_date.month, c_year = today_date.year) #retrieves all the variables for the current calendar month/year
+
+    data = {'n_view': 'month', 'n_year': today_date.year, 'n_month': today_date.month, 'n_day': today_date.day,'n_filter':filter} #makes a dictionary of the current day's month/day/year, needed to view the next month/week/year
+    events = events.filter(date_time__month = cal_var["cur_month"])
+
+    insert_dict = {'events': sorted(events,key = lambda x: x.date_time)} #creates a dictionary with the events in the current month
+
+    insert_dict.update(cal_var) #adds the calendar variables into the dictionary that will passed onto html
+    insert_dict.update(data) #adds needed data into the dictionary that will passed onto html
+
+
+
+    return render(request,'mainPage/weekPage.html',insert_dict)
