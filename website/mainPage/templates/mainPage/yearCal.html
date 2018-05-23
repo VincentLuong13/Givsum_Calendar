@@ -80,7 +80,7 @@
                                 
                                 {% if month_info.today_day == forloop.counter and month_info.cur_month == month_info.today_month and month_info.cur_year == month_info.today_year %}
                                         <td class="y-today" >
-                                                <div class="y-day" data-html="true" style="background-color:coral;"><a href="#" data-html="true" data-toggle="popover" data-trigger="focus" title="{{month_info.cur_name_of_month}} {{forloop.counter}}, {{month_info.cur_year}}" data-content="
+                                                <div class="y-day" data-html="true" style="background-color:coral;"><a href="#" data-html="true" data-toggle="popover" data-trigger="focus" title="Today: {{month_info.cur_name_of_month}} {{forloop.counter}}, {{month_info.cur_year}}" data-content="
                                                     {% for event in event_info.0 %}
                                                         {% if event.date_time.minute  == 0 %}
                                                             {{event.date_time.hour}}:{{event.date_time.minute}}0
@@ -159,7 +159,7 @@
       window.location.href = "{% url 'mainPage:prevView' view='year' year=n_year month=n_month day=n_day filter=n_filter %}";  
   });
   $(".today-button").click(function(){
-        window.location.href = "{% url 'mainPage:currentTime' %}";   
+        window.location.href = "{% url 'mainPage:currentTime'  view='year' filter=n_filter %}";   
   });
   $(".all-events").click(function(){
       selected = "allEvents";

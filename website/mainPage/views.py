@@ -166,11 +166,16 @@ def prevView(request,view, year, month, day,filter):
     
     return HttpResponseRedirect('/' + str(view) + '/' + str(year) + '-' + str(month) + '-' + str(day) + '/filters='+str(filter) + '/') #month/2018-06-12 -> month/2018-05-01
 
-def resetToCurrent(request):
+def resetToCurrent(request,view,filter):
     '''
     This function redirects to the calendarpage to reset the date to view the current month/week/year
     '''
-    return HttpResponseRedirect('/calendarpage')
+    print(filter)
+    if(view == 'month'):
+        return HttpResponseRedirect('/calendarpage/filters=' + str(filter)+'/')
+    elif(view == 'year'):
+        return HttpResponseRedirect('/calendarpage/year/filters=' + str(filter)+'/')
+    
 
 def yearview(request, year = datetime.datetime.today().year,filter = 'all'):
     if filter == 'all':
