@@ -1,10 +1,539 @@
 {% extends 'base.html' %}
 {% block head %}
     {% load static %}
-    <link rel='stylesheet' href = "{% static 'mainPage/calendarPage.css' %}">
+    <link rel='stylesheet' href = "{% static 'mainPage/weekPage.css' %}">
 {% endblock %}
 {% block right %}
 <!-- start of calendar -->
-
-
+<div class="month">
+    <!-- start drop down menu -->
+    <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle float-left" style="background-color: coral; border: coral; color: white;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        WEEK
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item active" href="#">WEEK</a>
+        <a class="dropdown-item" href="/calendarpage/">MONTH</a>
+        <a class="dropdown-item" href="/calendarpage/year/filters=all/">YEAR</a>
+    </div>
+    </div>
+    <!-- end drop down menu -->     
+    MONTH ##, 2018 - MONTH ##, 2018
+    <!-- arrows -->        
+    <span class="prev"><a href="#">&#10094;</a></span>
+    <span class="next"><a href="#">&#10095;</a></span>
+</div>
+<div class="week">
+    <table>
+        <tr>
+            <td class="weekday">
+            </td>  
+            <td class="weekday">
+                Sunday
+            </td>            
+            <td class="weekday">
+                Monday
+            </td>
+            <td class="weekday">
+                Tuesday
+            </td>
+            <td class="weekday">
+                Wednesday
+            </td>
+            <td class="weekday">
+                Thursday
+            </td>
+            <td class="weekday">
+                Friday
+            </td>
+            <td class="weekday">
+                Saturday
+            </td>            
+        </tr>
+    </table>
+</div>
+<div class="calendar">
+        <table>
+            <tr>
+                <td class="date">12am</td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr>
+            <tr>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+            </tr>
+            <tr>
+                <td class="date">1am</td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr>
+            <tr>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr>
+            <tr>
+                <td class="date">2am</td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr>
+            <tr>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr
+            <tr>
+                    <td class="date">3am</td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                </tr>
+                <tr>
+                    <td class="date">4am</td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                    <td class="date">5am</td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                        <td class="date">6am</td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="date">7am</td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="date">8am</td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                            <td class="date">9am</td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date">10am</td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date">11am</td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+            <tr>
+                <td class="date">12pm</td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr>
+            <tr>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+            </tr>
+            <tr>
+                <td class="date">1pm</td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr>
+            <tr>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr>
+            <tr>
+                <td class="date">2pm</td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr>
+            <tr>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+                <td class="date"></td>
+            </tr
+            <tr>
+                    <td class="date">3pm</td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                </tr>
+                <tr>
+                    <td class="date">4pm</td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                    <td class="date">5pm</td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                    <td class="date"></td>
+                </tr>
+                <tr>
+                        <td class="date">6pm</td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="date">7pm</td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="date">8pm</td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                        <td class="date"></td>
+                    </tr>
+                    <tr>
+                            <td class="date">9pm</td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date">10pm</td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date">11pm</td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+        </table>
+    </div>
 {% endblock %}
