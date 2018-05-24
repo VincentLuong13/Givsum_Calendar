@@ -1,7 +1,3 @@
-body {font-family: Helvetica, sans-serif;}
-
-
-
     ::-webkit-scrollbar {
         width: 4px;
     }
@@ -17,13 +13,6 @@ body {font-family: Helvetica, sans-serif;}
     table {
         width: 100%;
         table-layout: fixed;
-    }
-
-    .calendar{ 
-        position: relative;
-        width: 100%;
-        margin: auto;
-        background-color:#fbfbfb;
     }
 
     .month {
@@ -52,62 +41,6 @@ body {font-family: Helvetica, sans-serif;}
         color: #666;
         font-size: 14px;
         text-transform: uppercase;
-    }
-
-    .date{
-        position: relative;
-        height: calc((100vh - 90px) / 24);
-        color: #777;
-        border-bottom: 1px solid #ddd;
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        text-align: center;
-    }
-
-    .empty {
-        position: relative;
-        height: 120px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .day {
-        position: relative;
-        top: -1px;
-        left: 5px;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-        padding-top: 1px; 
-        font-size:12px;
-        color: #777;
-        font-weight: bold;
-    }
-
-    .today {
-        position: relative;
-        height: 125px;
-        color: #777;
-        border: 1px solid #ddd;
-        background-color: #eee;
-    }
-
-    .events {
-        position: relative;
-        height: 70%;
-        width: 95%;
-        overflow-y: auto;
-        left: 5px;
-        top: 2px;
-        font-size: 12px;
-        padding: 0 5px;
-    }
-
-    .dot {
-        height: 7px;
-        width: 7px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 5px;
     }
 
     .next {
