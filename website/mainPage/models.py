@@ -1,6 +1,25 @@
 from django.db import models
 import time,datetime
 from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
+
+REPEAT_CHOICES= [
+    ('none', 'None'),
+    ('daily', 'Daily'),
+    ('weekly', 'Weekly'),
+    ('monthly', 'Monthly'),
+    ('yearly','Yearly')
+    ]
+DAY_CHOICES = [
+    ('None', 'None'),
+    ('Sunday', 'Sun'),
+    ('Monday', 'Mon'),
+    ('Tuesday', 'Tue'),
+    ('Wednesday', 'Wed'),
+    ('Thursday', 'Thu'),
+    ('Friday', 'Fri'),
+    ('Saturday', 'Sat')
+]
 
 class Organization(models.Model):
     name = models.CharField(max_length = 100)
@@ -13,13 +32,16 @@ class Organization(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length = 250)
     date_time = models.DateTimeField(default=datetime.datetime.now(), blank=True)
+    end_date = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     day_name = models.IntegerField(default = datetime.datetime.now().weekday())
     duration =models.IntegerField(default=0)
     event_description = models.CharField(default = '' ,max_length = 750)
     address = models.CharField(default = '' ,max_length = 750)
     picture_url = models.CharField(default = '' ,max_length = 3000)
     event_url = models.CharField(default = '' ,max_length = 3000)
-    on_going = models.BooleanField(default = False)
+    repeat = models.CharField(max_length = 128, choices = REPEAT_CHOICES, default='None')
+    day_repeat = MultiSelectField(choices = DAY_CHOICES, default = 'None')
+    
 
 
     def __str__(self):
