@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .handle_events import createRepeatEvents,create_specific_day_events
 
 
     
@@ -269,6 +270,10 @@ def weekview(request,filter = 'all'):
     insert_dict.update(cal_var) #adds the calendar variables into the dictionary that will passed onto html
     insert_dict.update(data) #adds needed data into the dictionary that will passed onto html
 
-
-
     return render(request,'mainPage/weekPage.html',insert_dict)
+
+def controlView(request):
+    test = Event.objects.all().filter(name = 'Test Repeat')[0]
+    createRepeatEvents(test)
+    #create_specific_day_events(test)
+    return render(request,'mainPage/controlPanel.html')

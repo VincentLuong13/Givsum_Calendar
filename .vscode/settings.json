@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\vince\\.virtualenvs\\Givsum_Test-stVGfZ51\\scripts\\python.exe"
+    "python.pythonPath": "C:\\Users\\vince\\.virtualenvs\\Givsum_Test-stVGfZ51\\scripts\\python.exe",
+    "python.linting.pylintEnabled": false
 }

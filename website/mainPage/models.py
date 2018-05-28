@@ -12,13 +12,13 @@ REPEAT_CHOICES= [
     ]
 DAY_CHOICES = [
     ('None', 'None'),
-    ('Sunday', 'Sun'),
-    ('Monday', 'Mon'),
-    ('Tuesday', 'Tue'),
-    ('Wednesday', 'Wed'),
-    ('Thursday', 'Thu'),
-    ('Friday', 'Fri'),
-    ('Saturday', 'Sat')
+    ('1','Sunday'),
+    ('2','Monday'),
+    ('3','Tuesday'),
+    ('4','Wednesday'),
+    ('5','Thursday'),
+    ('6','Friday'),
+    ('7','Saturday')
 ]
 
 class Organization(models.Model):
@@ -47,6 +47,12 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
+
+class eventRepeat(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    start_date = models.DateTimeField(default=datetime.datetime.now(), blank=True)
+    end_date = models.DateTimeField(default=datetime.datetime.now(), blank=True)
+    
 
 class Atendee(models.Model):
     user = models.OneToOneField(User,related_name='profile',on_delete=models.CASCADE)
