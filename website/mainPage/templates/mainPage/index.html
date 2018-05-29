@@ -66,6 +66,8 @@
     $(".my-events").addClass("active");
   }else if(localStorage.getItem("select")=="friendEvents"){
     $(".friend-events").addClass("active");
+  }else if(localStorage.getItem("select")=="onGoing"){
+      $(".ongoing-events").addClass("active");
   }
 
 //add on going later
@@ -84,7 +86,7 @@
   });
 
   $(".ongoing-events").click(function(){
-        selected = "myEvents";
+        selected = "onGoing";
         localStorage.setItem("select",selected);
         window.location.href = "{% url 'mainPage:schedulepage' filter='ongoing' %}";  
   });

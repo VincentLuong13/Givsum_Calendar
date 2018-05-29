@@ -148,6 +148,8 @@
     $(".my-events").addClass("active");
   }else if(localStorage.getItem("select")=="friendEvents"){
     $(".friend-events").addClass("active");
+  }else if(localStorage.getItem("select")=="onGoing"){
+      $(".ongoing-events").addClass("active");
   }
   
   $(document).ready(function(){
@@ -174,7 +176,7 @@
 
     });
     $(".ongoing-events").click(function(){
-      selected = "myEvents";
+      selected = "onGoing";
       localStorage.setItem("select",selected);
       window.location.href = "{% url 'mainPage:yearview2'  filter='ongoing' year=n_year %}";
 
