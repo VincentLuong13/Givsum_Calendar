@@ -28,7 +28,8 @@ def schedulepage(request, filter = "all"):
             events = request.user.profile.events.all()
         except:
             events = []
-
+    elif filter =='ongoing':
+        events = Event.objects.all().exclude(repeat='None')
     elif filter == 'friends':
         events = Event.objects.none()
         try:
@@ -273,7 +274,8 @@ def weekview(request,filter = 'all'):
     return render(request,'mainPage/weekPage.html',insert_dict)
 
 def controlView(request):
-    test = Event.objects.all().filter(name = 'Test Repeat')[0]
-    createRepeatEvents(test)
+    events = Event.objects.all().filter(repeat = 'weekly')
+    for e in events:
+        createRepeatEvents(e)
     #create_specific_day_events(test)
     return render(request,'mainPage/controlPanel.html')

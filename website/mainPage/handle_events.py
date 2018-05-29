@@ -8,6 +8,7 @@ def createRepeatEvents(parent):
         event.save()
     else:
         for dt in create_specific_day_events(parent):
+            print(str(parent.repeat))
             start = dt
             end = parent.end_date
             change = timedelta(days = 0)
@@ -16,11 +17,11 @@ def createRepeatEvents(parent):
                     next_date  =  start.replace(month = start.month+1)
                     num_days = len(range(calendar.monthrange(next_date.year,next_date.month)[1]))
                     change = timedelta(days = num_days)
-                    print(change)
                     event = eventRepeat(event = parent,start_date = start,end_date = start)
                     event.save()
                     start = start+change 
             else:
+                
                 if (str(parent.repeat) ==  'daily'):
                     change = timedelta(days = 1)
                 elif (str(parent.repeat) ==  'weekly'):

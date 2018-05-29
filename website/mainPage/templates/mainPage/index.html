@@ -67,6 +67,7 @@
   }else if(localStorage.getItem("select")=="friendEvents"){
     $(".friend-events").addClass("active");
   }
+
 //add on going later
 
   $(document).ready(function(){
@@ -80,6 +81,12 @@
         selected = "myEvents";
         localStorage.setItem("select",selected);
         window.location.href = "{% url 'mainPage:schedulepage' filter='myevents' %}";  
+  });
+
+  $(".ongoing-events").click(function(){
+        selected = "myEvents";
+        localStorage.setItem("select",selected);
+        window.location.href = "{% url 'mainPage:schedulepage' filter='ongoing' %}";  
   });
 
     $(".friend-events").click(function(){
