@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Organization, Event,Atendee
+from .models import Organization, Event,Atendee,eventRepeat
 from django.contrib.auth.models import User
 import datetime
 import calendar
@@ -72,7 +72,8 @@ def calendarPage(request, filter = 'all'):
             events = request.user.profile.events.all()
         except:
             events = []
-
+    elif filter == 'ongoing':
+        events = eventRepeat.objects.all()
     elif filter == 'friends':
         events = Event.objects.none()
         try:
@@ -111,6 +112,8 @@ def cal(request, view, year, month, day,filter ='all'):
             events = request.user.profile.events.all()
         except:
             events = []
+    elif filter == 'ongoing':
+        events = eventRepeat.objects.all()
 
     elif filter == 'friends':
         events = Event.objects.none()
@@ -187,6 +190,8 @@ def yearview(request, year = datetime.datetime.today().year,filter = 'all'):
             events = request.user.profile.events.all()
         except:
             events = []
+    elif filter == 'ongoing':
+        events = eventRepeat.objects.all()
 
     elif filter == 'friends':
         events = Event.objects.none()

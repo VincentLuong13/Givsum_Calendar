@@ -4,7 +4,7 @@ import calendar
 
 def createRepeatEvents(parent):
     if (str(parent.repeat) ==  'None'):
-        event = eventRepeat(event = parent,start_date = parent.date_time,end_date = parent.date_time)
+        event = eventRepeat(event = parent,date_time = parent.date_time,end_date = parent.date_time,name = parent.name)
         event.save()
     else:
         for dt in create_specific_day_events(parent):
@@ -17,7 +17,7 @@ def createRepeatEvents(parent):
                     next_date  =  start.replace(month = start.month+1)
                     num_days = len(range(calendar.monthrange(next_date.year,next_date.month)[1]))
                     change = timedelta(days = num_days)
-                    event = eventRepeat(event = parent,start_date = start,end_date = start)
+                    event = eventRepeat(event = parent,date_time = start,end_date = start,name=parent.name)
                     event.save()
                     start = start+change 
             else:
@@ -29,7 +29,7 @@ def createRepeatEvents(parent):
                 elif (str(parent.repeat) ==  'yearly'):
                     change = timedelta(days = 365)
                 while (start<=end):
-                    event = eventRepeat(event = parent,start_date = start,end_date = start)
+                    event = eventRepeat(event = parent,date_time = start,end_date = start,name=parent.name)
                     event.save()
                     start = start+change 
                 

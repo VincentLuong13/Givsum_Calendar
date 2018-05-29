@@ -121,6 +121,11 @@
         localStorage.setItem("select",selected);
         window.location.href = "{% url 'mainPage:calendarpage' filter='myevents' %}";  
     });
+    $(".ongoing-events").click(function(){
+       selected = "myEvents";
+        localStorage.setItem("select",selected);
+        window.location.href = "{% url 'mainPage:calendarpage' filter='ongoing' %}";  
+    });
 
     $(".friend-events").click(function(){
       selected = "friendEvents";

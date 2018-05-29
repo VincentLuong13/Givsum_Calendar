@@ -50,7 +50,8 @@ class Event(models.Model):
 
 class eventRepeat(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    start_date = models.DateTimeField(default=datetime.datetime.now(), blank=True)
+    name = models.CharField(max_length = 250,default = '')
+    date_time = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     end_date = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     
 

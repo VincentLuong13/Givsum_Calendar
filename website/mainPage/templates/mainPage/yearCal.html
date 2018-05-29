@@ -173,6 +173,12 @@
       window.location.href = "{% url 'mainPage:yearview2'  filter='myevents' year=n_year %}";
 
     });
+    $(".ongoing-events").click(function(){
+      selected = "myEvents";
+      localStorage.setItem("select",selected);
+      window.location.href = "{% url 'mainPage:yearview2'  filter='ongoing' year=n_year %}";
+
+    });
   $(".friend-events").click(function(){
       selected = "friendEvents";
       localStorage.setItem("select",selected);
