@@ -9,7 +9,7 @@
 
 {% for date, events in ev_dict.items %}
         <!-- Creates day seperator (sticky)  -->
-        <div id="date-marker"> {{date}} </div>
+        <div id="date-marker"><a name="{{events.0.0.date_time.month}}{{events.0.0.date_time.day}}{{events.0.0.date_time.year}}">{{date}}</a> </div>
     
     <!--  Iterate through the Events of that day (.0 = event information, .1 = event atendees) -->
     {% for event in events %}

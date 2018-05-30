@@ -36,7 +36,8 @@
         font-size: 40px;
         font-weight: bold;
         text-transform: uppercase;
-        overflow-wrap: break-word;
+        overflow: hidden;
+        white-space: nowrap;
         width: 100%;       
     }
     #event a {
