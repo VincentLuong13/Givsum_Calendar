@@ -1,214 +1,125 @@
 {% extends 'base.html' %}
 {% block head %}
     {% load static %}
-    <link rel='stylesheet' href="{% static 'mainPage/schedule-template/css/reset.css' %}"/>
-    <link rel='stylesheet' href="{% static 'mainPage/schedule-template/css/style.css' %}"/>
-    <style>
-        .month {
-        width: 100%;
-        padding: 20px 25px;
-        margin: 20px auto 0px auto;
-        text-align:right;
-        background-color:coral;
-        color: white;
-        font-size: 27px;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/smoothness/jquery-ui.css">
+    <link rel='stylesheet' type='text/css' href='{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.css' %}' />
 
-        ::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #ddd; 
-    }
-    .next {
-        padding: 2px 3px;
-    }
-
-    .next a:hover {
-        color: #ffa584;
-        text-decoration: none;
-    }
-
-    .prev {
-        padding: 2px 3px;
-    }
-
-    .prev a:hover {
-        color: #ffa584;
-        text-decoration: none;
-    }
-
-    a {
-        text-decoration:none;
-        color: white;
-    }
+    <style type='text/css'>
+        body {
+          font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+          margin: 0;
+        }
+      
+        h1 {
+          margin: 0 0 1em;
+          padding: 0.5em 0.5em 0;
+        }
+      
+        p.description {
+          font-size: 0.8em;
+          padding: 1em;
+          top: 3.2em;
+          margin-right: 400px;
+        }
+      
+        #message {
+          font-size: 0.7em;
+          position: absolute;
+          top: 1em;
+          right: 1em;
+          width: 350px;
+          display: none;
+          padding: 1em;
+          background: #ffc;
+          border: 1px solid #dda;
+        }
     </style>
+
+    <script type='text/javascript' src='{% static 'mainPage/jquery-week-calendar-master/libs/jquery-1.4.4.min.js' %}'></script>
+    <script type='text/javascript' src='{% static 'mainPage/jquery-week-calendar-master/libs/jquery-ui-1.8.11.custom.min.js' %}'></script>
+    <script type='text/javascript' src='{% static 'mainPage/jquery-week-calendar-master/libs/date.js' %}'></script>
+    <script type='text/javascript' src='{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.js' %}'></script>
+
+    <script type='text/javascript'>
+        var year = new Date().getFullYear();
+        var month = new Date().getMonth();
+        var day = new Date().getDate();
+      
+        var eventData = {
+          events : [
+             {'id':1, 'start': new Date(year, month, day, 12), 'end': new Date(year, month, day, 13, 35),'title':'Lunch with Mike'},
+             {'id':2, 'start': new Date(year, month, day, 14), 'end': new Date(year, month, day, 14, 45),'title':'Dev Meeting'},
+             {'id':3, 'start': new Date(year, month, day + 1, 18), 'end': new Date(year, month, day + 1, 18, 45),'title':'Hair cut'},
+             {'id':4, 'start': new Date(year, month, day - 1, 8), 'end': new Date(year, month, day - 1, 9, 30),'title':'Team breakfast'},
+             {'id':5, 'start': new Date(year, month, day + 1, 14), 'end': new Date(year, month, day + 1, 16),'title':'Product showcase'},
+             {'id':5, 'start': new Date(year, month, day + 1, 15), 'end': new Date(year, month, day + 1, 17),'title':'Overlay event'}
+          ]
+        };
+      
+        $(document).ready(function() {
+          $('#calendar').weekCalendar({
+            data: eventData,
+      
+            timeslotsPerHour: 4,
+            allowCalEventOverlap: true,
+            overlapEventsSeparate: true,
+            totalEventsWidthPercentInOneColumn : 95,
+      
+            height: function($calendar) {
+              return $(window).height() - $('h1').outerHeight(true);
+            },
+            eventRender: function(calEvent, $event) {
+              if (calEvent.end.getTime() < new Date().getTime()) {
+                $event.css('backgroundColor', '#aaa');
+                $event.find('.time').css({
+                  backgroundColor: '#999',
+                  border:'1px solid #888'
+                });
+              }
+            },
+            eventNew: function(calEvent, $event) {
+              displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+              alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
+            },
+            eventDrop: function(calEvent, $event) {
+              displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            eventResize: function(calEvent, $event) {
+              displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            eventClick: function(calEvent, $event) {
+              displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            eventMouseover: function(calEvent, $event) {
+              displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            eventMouseout: function(calEvent, $event) {
+              displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            noEvents: function() {
+              displayMessage('There are no events for this week');
+            }
+          });
+      
+          function displayMessage(message) {
+            $('#message').html(message).fadeIn();
+          }
+      
+          $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
+        });
+        </script>
+
 {% endblock %}
 {% block right %}
-<!-- start of calendar -->
-<div class="month">
-    <!-- start drop down menu -->
-    <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle float-left" style="background-color: coral; border: coral; color: white;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        WEEK
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item active" href="#">WEEK</a>
-        <a class="dropdown-item" href="/calendarpage/">MONTH</a>
-        <a class="dropdown-item" href="/calendarpage/year/filters=all/">YEAR</a>
-    </div>
-    </div>
-    <!-- end drop down menu -->     
-    MONTH ##, 2018 - MONTH ##, 2018
-    <!-- arrows -->        
-    <span class="prev"><a href="#">&#10094;</a></span>
-    <span class="next"><a href="#">&#10095;</a></span>
-</div>
+<h1>Week Calendar Demo</h1>
 
+  <p class="description">
+    This calendar demonstrates a basic calendar. Events triggered are
+    displayed in the message area. Appointments in the past are shaded grey.
+    <br/>
+    This calendar demonstrates overlapped events with little space on right to
+    create new events  (new option <i>"totalEventsWidthPercentInOneColumn"</i>)
+  </p>
 
-<div class="cd-schedule loading">
-        <div class="timeline">
-        <ul>
-        <li><span>04:00</span></li>
-        <li><span>04:30</span></li>
-        <li><span>05:00</span></li>
-        <li><span>05:30</span></li>       
-        <li><span>06:00</span></li>
-        <li><span>06:30</span></li>
-        <li><span>07:00</span></li>
-        <li><span>07:30</span></li>
-        <li><span>08:00</span></li>
-        <li><span>08:30</span></li>       
-        <li><span>09:00</span></li>
-        <li><span>09:30</span></li>
-        <li><span>10:00</span></li>
-        <li><span>10:30</span></li>
-        <li><span>11:00</span></li>
-        <li><span>11:30</span></li>
-        <li><span>12:00</span></li>
-        <li><span>12:30</span></li>
-        <li><span>13:00</span></li>
-        <li><span>13:30</span></li>
-        <li><span>14:00</span></li>
-        <li><span>14:30</span></li>
-        <li><span>15:00</span></li>
-        <li><span>15:30</span></li>
-        <li><span>16:00</span></li>
-        <li><span>16:30</span></li>
-        <li><span>17:00</span></li>
-        <li><span>17:30</span></li>
-        <li><span>18:00</span></li>
-        <li><span>18:30</span></li>
-        <li><span>19:00</span></li>
-        <li><span>19:30</span></li>
-        <li><span>20:00</span></li>
-        <li><span>20:30</span></li>
-        <li><span>21:00</span></li>
-        <li><span>21:30</span></li>
-        <li><span>22:00</span></li>
-        <li><span>22:30</span></li>
-        <li><span>23:00</span></li>
-        <li><span>23:30</span></li>
-        <li><span>00:00</span></li>
-        
-        </ul>
-        </div> 
-        <div class="events">
-        <ul>
-        <li class="events-group">
-        <div class="top-info"><span>Sunday</span></div>
-        <ul>
-        <li class="single-event" data-start="05:30" data-end="08:20" data-content="event-abs-circuit" data-event="event-1">
-        <a href="#0">
-        <em class="event-name">Event Name</em>
-        </a>
-         </li>
-        </ul>
-        </li>
-        <li class="events-group">
-        <div class="top-info"><span>Monday</span></div>
-        <ul>
-        <li class="single-event" data-start="05:30" data-end="08:20" data-content="event-abs-circuit" data-event="event-1">
-        <a href="#0">
-        <em class="event-name">Event Name</em>
-        </a>
-         </li>
-         
-        </ul>
-        </li>
-        <li class="events-group">
-        <div class="top-info"><span>Tuesday</span></div>
-        <ul>
-        <li class="single-event" data-start="06:45" data-end="08:00" data-content="event-yoga-1" data-event="event-3">
-        <a href="#0">
-        <em class="event-name">Event Name</em>
-        </a>
-        </li>
-        </ul>
-        </li>
-        <li class="events-group">
-        <div class="top-info"><span>Wednesday</span></div>
-        <ul>
-        <li class="single-event" data-start="08:45" data-end="12:00" data-content="event-yoga-1" data-event="event-3">
-        <a href="#0">
-        <em class="event-name">Event Name</em>
-        </a>
-        </li>
-        </ul>
-        </li>
-        <li class="events-group">
-        <div class="top-info"><span>Thursday</span></div>
-        <ul>
-        <li class="single-event" data-start="07:00" data-end="10:30" data-content="event-rowing-workout" data-event="event-2">
-        <a href="#0">
-        <em class="event-name">Event Name</em>
-        </a>
-        </li>
-        </ul>
-        </li>
-        <li class="events-group">
-        <div class="top-info"><span>Friday</span></div>
-        <ul>
-        <li class="single-event" data-start="10:00" data-end="11:00" data-content="event-rowing-workout" data-event="event-2">
-        <a href="#0">
-        <em class="event-name">Event Name</em>
-        </a>
-        </li>
-        </ul>
-        </li>
-        <li class="events-group">
-        <div class="top-info"><span>Saturday</span></div>
-        <ul>
-        <li class="single-event" data-start="10:00" data-end="11:00" data-content="event-rowing-workout" data-event="event-2">
-        <a href="#0">
-        <em class="event-name">Event Name</em>
-        </a>
-        </li>
-        </ul>
-        </li>
-        </div>
-        <div class="event-modal">
-        <header class="header">
-        <div class="content">
-        <span class="event-date"></span>
-        <h3 class="event-name"></h3>
-        </div>
-        <div class="header-bg"></div>
-        </header>
-        <div class="body">
-        <div class="event-info"></div>
-        <div class="body-bg"></div>
-        </div>
-        <a href="#0" class="close">Close</a>
-        </div>
-     <script src="{% static 'mainPage/schedule-template/js/jquery-3.0.0.min.js' %}"></script>
-     <script src="{% static 'mainPage/schedule-template/js/main.js' %}"></script>
-     <script src="{% static 'mainPage/schedule-template/js/modernizr.js' %}"></script>
+  <div id="calendar"></div>
 {% endblock %}
