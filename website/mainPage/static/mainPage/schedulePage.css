@@ -39,6 +39,7 @@
         overflow: hidden;
         white-space: nowrap;
         width: 100%;       
+        text-overflow: ellipsis;
     }
     #event a {
         color: #323232;
@@ -132,3 +133,5 @@
         color: #FF7F50; 
         background-color: #FFFFFF; 
       }
+
+        
