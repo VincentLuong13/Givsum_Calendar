@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block head %}
     {% load static %}
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/smoothness/jquery-ui.css">
-    <link rel='stylesheet' type='text/css' href='{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.css' %}' />
-
+<!--    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/smoothness/jquery-ui.css">-->
+    <link rel='stylesheet' type='text/css' href="{% static 'mainPage/jquery-week-calendar-master/libs/css/smoothness/jquery-ui-1.8.11.custom.css' %}" />
+    <link rel='stylesheet' type='text/css' href="{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.css' %}" />
     <style type='text/css'>
         body {
           font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
@@ -35,10 +35,10 @@
         }
     </style>
 
-    <script type='text/javascript' src='{% static 'mainPage/jquery-week-calendar-master/libs/jquery-1.4.4.min.js' %}'></script>
-    <script type='text/javascript' src='{% static 'mainPage/jquery-week-calendar-master/libs/jquery-ui-1.8.11.custom.min.js' %}'></script>
-    <script type='text/javascript' src='{% static 'mainPage/jquery-week-calendar-master/libs/date.js' %}'></script>
-    <script type='text/javascript' src='{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.js' %}'></script>
+    <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/libs/jquery-1.4.4.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/libs/jquery-ui-1.8.11.custom.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/libs/date.js' %}"></script>
+    <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.js' %}"></script>
 
     <script type='text/javascript'>
         var year = new Date().getFullYear();
@@ -57,6 +57,7 @@
         };
       
         $(document).ready(function() {
+//          alert('here');
           $('#calendar').weekCalendar({
             data: eventData,
       
@@ -107,8 +108,62 @@
       
           $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
         });
+//        function hi(){
+//          alert("hi");
+//        }
+      function start(){
+//        alert("here3");
+        $('#calendar').weekCalendar({
+            data: eventData,
+      
+            timeslotsPerHour: 4,
+            allowCalEventOverlap: true,
+            overlapEventsSeparate: true,
+            totalEventsWidthPercentInOneColumn : 95,
+      
+            height: function($calendar) {
+              return $(window).height() - $('h1').outerHeight(true);
+            },
+            eventRender: function(calEvent, $event) {
+              if (calEvent.end.getTime() < new Date().getTime()) {
+                $event.css('backgroundColor', '#aaa');
+                $event.find('.time').css({
+                  backgroundColor: '#999',
+                  border:'1px solid #888'
+                });
+              }
+            },
+            eventNew: function(calEvent, $event) {
+              displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+              alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
+            },
+            eventDrop: function(calEvent, $event) {
+              displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            eventResize: function(calEvent, $event) {
+              displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            eventClick: function(calEvent, $event) {
+              displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            eventMouseover: function(calEvent, $event) {
+              displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            eventMouseout: function(calEvent, $event) {
+              displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+            },
+            noEvents: function() {
+              displayMessage('There are no events for this week');
+            }
+          });
+        function displayMessage(message) {
+            $('#message').html(message).fadeIn();
+          }
+      
+          $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
+      }
         </script>
-
+        
 {% endblock %}
 {% block right %}
 <h1>Week Calendar Demo</h1>
@@ -122,4 +177,7 @@
   </p>
 
   <div id="calendar"></div>
+  <script>start()</script>
+<!--  <script>hi();</script>-->
+<!--  <script>alert("here2");</script>-->
 {% endblock %}
