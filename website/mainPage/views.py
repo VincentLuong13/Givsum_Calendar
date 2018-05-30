@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .handle_events import createRepeatEvents,create_specific_day_events
+from .handle_events import createRepeatEvents,create_specific_day_events,edit_repeat_event
 
 
     
@@ -282,5 +282,6 @@ def controlView(request):
     events = Event.objects.all().filter(repeat = 'weekly')
     for e in events:
         createRepeatEvents(e)
-    #create_specific_day_events(test)
+    create_specific_day_events(test)
     return render(request,'mainPage/controlPanel.html')
+

@@ -56,6 +56,24 @@ def create_specific_day_events(parent):
         events_datetimes.append(parent.date_time)
     return events_datetimes
 
+
+def edit_repeat_event(parent,time,edit,attr,change):
+
+    if edit == 'this':
+        events = parent.child.all().filter(date_time = time)
+    elif edit == 'all':
+        events = parent.child.all()
+    elif edit == 'this_continue':
+        events = [event for event in parent.child.all() if event.date_time>= time]
+
+    for event in events:
+        setattr(event,attr,change)
+
+
+
+
+
+
             
     
         
