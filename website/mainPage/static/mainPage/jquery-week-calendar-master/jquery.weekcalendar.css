@@ -37,7 +37,7 @@
 }
 
 .wc-header {
-  background: #eee;
+  background: #fff;
   border-width:1px 0;
   border-style:solid;
 }
@@ -201,7 +201,7 @@ table.wc-time-slots {
 }
 
 .wc-cal-event {
-    background-color: #68a1e5;
+    background-color: coral;
   /* Modern Browsers */ opacity: 0.8;
   /* IE 8 */ -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   /* IE 5-7 */ filter: alpha(opacity=80);
@@ -229,8 +229,8 @@ table.wc-time-slots {
 }
 
 .wc-cal-event .wc-time {
-    background-color: #2b72d0;
-    border: 1px solid #1b62c0;
+    background-color: coral;
+    border: 1px solid coral;
     color: #fff;
     padding: 0;
     font-weight: bold;

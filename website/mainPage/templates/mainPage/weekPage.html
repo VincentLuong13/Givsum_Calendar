@@ -4,9 +4,9 @@
 <!--    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/smoothness/jquery-ui.css">-->
     <link rel='stylesheet' type='text/css' href="{% static 'mainPage/jquery-week-calendar-master/libs/css/smoothness/jquery-ui-1.8.11.custom.css' %}" />
     <link rel='stylesheet' type='text/css' href="{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.css' %}" />
+    <link rel='stylesheet' href = "{% static 'mainPage/weekPage.css' %}">
     <style type='text/css'>
         body {
-          font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
           margin: 0;
         }
       
@@ -33,6 +33,36 @@
           background: #ffc;
           border: 1px solid #dda;
         }
+
+    .wc-cal-event .wc-time {
+        background-color: #e57248;
+        border: 1px solid #e57248;
+        color: #fff;
+        padding: 0;
+        font-weight: bold;
+    }
+
+    .wc-grid-timeslot-header {
+      width: 6%;
+      background: #eee;
+    }
+        
+    .wc-header td {
+        background-color: #ddd;
+        color: #666;
+    }
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #ddd; 
+    }
+
     </style>
 
     <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/libs/jquery-1.4.4.min.js' %}"></script>
@@ -59,18 +89,18 @@
             allowCalEventOverlap: true,
             overlapEventsSeparate: true,
             totalEventsWidthPercentInOneColumn : 95,
+            readonly: true,
+            businessHours: false,
       
             height: function($calendar) {
               return $(window).height() - $('h1').outerHeight(true);
             },
             eventRender: function(calEvent, $event) {
-              if (calEvent.end.getTime() < new Date().getTime()) {
-                $event.css('backgroundColor', '#aaa');
+                $event.css('backgroundColor', 'coral');
                 $event.find('.time').css({
                   backgroundColor: '#999',
                   border:'1px solid #888'
                 });
-              }
             },
             eventNew: function(calEvent, $event) {
               displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
@@ -114,18 +144,18 @@
             allowCalEventOverlap: true,
             overlapEventsSeparate: true,
             totalEventsWidthPercentInOneColumn : 95,
+            readonly: true,
+            businessHours: false,
       
             height: function($calendar) {
               return $(window).height() - $('h1').outerHeight(true);
             },
             eventRender: function(calEvent, $event) {
-              if (calEvent.end.getTime() < new Date().getTime()) {
-                $event.css('backgroundColor', '#aaa');
+                $event.css('backgroundColor', 'coral');
                 $event.find('.time').css({
                   backgroundColor: '#999',
                   border:'1px solid #888'
                 });
-              }
             },
             eventNew: function(calEvent, $event) {
               displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
@@ -193,7 +223,24 @@
     This calendar demonstrates overlapped events with little space on right to
     create new events  (new option <i>"totalEventsWidthPercentInOneColumn"</i>)
   </p> -->
-
+  <!-- start of calendar -->
+<div class="month">
+  <!-- start drop down menu -->
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle float-left" style="background-color: coral; border: coral; color: white;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      MONTH
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="/calendarpage/week/">WEEK</a>
+      <a class="dropdown-item active" href="#">MONTH</a>
+      <a class="dropdown-item" href="/calendarpage/year/filters={{n_filter}}/">YEAR</a>
+  </div>
+  </div>
+  <!-- end drop down menu -->     
+  <!-- arrows -->        
+  <span class="prev"><a href="#">&#10094;</a></span>
+  <span class="next"><a href="#">&#10095;</a></span>
+</div>
   <div id="calendar"></div>
   <script>start()</script>
 <!--  <script>hi();</script>-->
