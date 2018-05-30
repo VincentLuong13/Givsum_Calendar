@@ -41,18 +41,12 @@
     <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.js' %}"></script>
 
     <script type='text/javascript'>
-        var year = new Date().getFullYear();
-        var month = new Date().getMonth();
-        var day = new Date().getDate();
       
         var eventData = {
           events : [
-             {'id':1, 'start': new Date(year, month, day, 12), 'end': new Date(year, month, day, 13, 35),'title':'Lunch with Mike'},
-             {'id':2, 'start': new Date(year, month, day, 14), 'end': new Date(year, month, day, 14, 45),'title':'Dev Meeting'},
-             {'id':3, 'start': new Date(year, month, day + 1, 18), 'end': new Date(year, month, day + 1, 18, 45),'title':'Hair cut'},
-             {'id':4, 'start': new Date(year, month, day - 1, 8), 'end': new Date(year, month, day - 1, 9, 30),'title':'Team breakfast'},
-             {'id':5, 'start': new Date(year, month, day + 1, 14), 'end': new Date(year, month, day + 1, 16),'title':'Product showcase'},
-             {'id':5, 'start': new Date(year, month, day + 1, 15), 'end': new Date(year, month, day + 1, 17),'title':'Overlay event'}
+            {%for event in events%}
+            {'id':{{forloop.counter}}, 'start': new Date({{event.1}}), 'end': new Date({{event.2}}),'title':'{{event.0.name}}'},
+          {%endfor%}
           ]
         };
       
@@ -156,6 +150,30 @@
               displayMessage('There are no events for this week');
             }
           });
+          $(".all-events").click(function(){
+            // selected = "allEvents";
+            // localStorage.setItem("select",selected);
+            window.location.href = "{% url 'mainPage:weekview2' filter='all' %}";
+            
+           });
+           $(".my-events").click(function(){
+            // selected = "allEvents";
+            // localStorage.setItem("select",selected);
+            window.location.href = "{% url 'mainPage:weekview2' filter='myevents' %}";
+            
+           });
+           $(".ongoing-events").click(function(){
+            // selected = "allEvents";
+            // localStorage.setItem("select",selected);
+            window.location.href = "{% url 'mainPage:weekview2' filter='ongoing' %}";
+            
+           });
+           $(".friend-events").click(function(){
+            // selected = "allEvents";
+            // localStorage.setItem("select",selected);
+            window.location.href = "{% url 'mainPage:weekview2' filter='friends' %}";
+            
+           });
         function displayMessage(message) {
             $('#message').html(message).fadeIn();
           }
@@ -166,15 +184,15 @@
         
 {% endblock %}
 {% block right %}
-<h1>Week Calendar Demo</h1>
+<!-- <h1>Week Calendar Demo</h1> -->
 
-  <p class="description">
+  <!-- <p class="description">
     This calendar demonstrates a basic calendar. Events triggered are
     displayed in the message area. Appointments in the past are shaded grey.
     <br/>
     This calendar demonstrates overlapped events with little space on right to
     create new events  (new option <i>"totalEventsWidthPercentInOneColumn"</i>)
-  </p>
+  </p> -->
 
   <div id="calendar"></div>
   <script>start()</script>

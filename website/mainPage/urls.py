@@ -23,5 +23,6 @@ urlpatterns = [
     path('calendarpage/filters=<str:filter>/',views.calendarPage , name = 'calendarpage'),
     path('rsvp/<int:event>/', views.rsvp, name = "rsvp"),
     path('calendarpage/week/', views.weekview, name = 'weekview'),
+    path('calendarpage/week/filters=<str:filter>/', views.weekview, name = 'weekview2'),
     path('controlPanel/',views.controlView ,name = 'controlPanel'),
 ]

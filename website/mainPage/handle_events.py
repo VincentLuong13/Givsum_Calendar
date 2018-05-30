@@ -17,7 +17,8 @@ def createRepeatEvents(parent):
                     next_date  =  start.replace(month = start.month+1)
                     num_days = len(range(calendar.monthrange(next_date.year,next_date.month)[1]))
                     change = timedelta(days = num_days)
-                    event = eventRepeat(event = parent,date_time = start,end_date = start,name=parent.name)
+                    duration = parent.end_time - parent.date_time
+                    event = eventRepeat(event = parent,date_time = start,end_time = start+duration,name=parent.name)
                     event.save()
                     start = start+change 
             else:
@@ -29,7 +30,8 @@ def createRepeatEvents(parent):
                 elif (str(parent.repeat) ==  'yearly'):
                     change = timedelta(days = 365)
                 while (start<=end):
-                    event = eventRepeat(event = parent,date_time = start,end_date = start,name=parent.name)
+                    duration = parent.end_time - parent.date_time
+                    event = eventRepeat(event = parent,date_time = start,end_time = start+duration,name=parent.name)
                     event.save()
                     start = start+change 
                 

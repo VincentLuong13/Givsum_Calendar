@@ -32,9 +32,9 @@ class Organization(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length = 250)
     date_time = models.DateTimeField(default=datetime.datetime.now(), blank=True)
+    end_time = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     end_date = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     day_name = models.IntegerField(default = datetime.datetime.now().weekday())
-    duration =models.IntegerField(default=0)
     event_description = models.CharField(default = '' ,max_length = 750)
     address = models.CharField(default = '' ,max_length = 750)
     picture_url = models.CharField(default = '' ,max_length = 3000)
@@ -52,7 +52,7 @@ class eventRepeat(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE,related_name='child')
     name = models.CharField(max_length = 250,default = '')
     date_time = models.DateTimeField(default=datetime.datetime.now(), blank=True)
-    end_date = models.DateTimeField(default=datetime.datetime.now(), blank=True)
+    end_time = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     
 
 class Atendee(models.Model):
