@@ -80,59 +80,59 @@
           ]
         };
       
-        $(document).ready(function() {
+//        $(document).ready(function() {
 //          alert('here');
-          $('#calendar').weekCalendar({
-            data: eventData,
-      
-            timeslotsPerHour: 4,
-            allowCalEventOverlap: true,
-            overlapEventsSeparate: true,
-            totalEventsWidthPercentInOneColumn : 95,
-            readonly: true,
-            businessHours: false,
-            showHeader: true,
-      
-            height: function($calendar) {
-              return $(window).height() - $('h1').outerHeight(true);
-            },
-            eventRender: function(calEvent, $event) {
-                $event.css('backgroundColor', 'coral');
-                $event.find('.time').css({
-                  backgroundColor: '#999',
-                  border:'1px solid #888'
-                });
-            },
-            eventNew: function(calEvent, $event) {
-              displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-              alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
-            },
-            eventDrop: function(calEvent, $event) {
-              displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-            eventResize: function(calEvent, $event) {
-              displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-            eventClick: function(calEvent, $event) {
-              displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-            eventMouseover: function(calEvent, $event) {
-              displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-            eventMouseout: function(calEvent, $event) {
-              displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-            noEvents: function() {
-              displayMessage('There are no events for this week');
-            }
-          });
-      
-          function displayMessage(message) {
-            $('#message').html(message).fadeIn();
-          }
-      
-          $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
-        });
+//          $('#calendar').weekCalendar({
+//            data: eventData,
+//      
+//            timeslotsPerHour: 4,
+//            allowCalEventOverlap: true,
+//            overlapEventsSeparate: true,
+//            totalEventsWidthPercentInOneColumn : 95,
+//            readonly: true,
+//            businessHours: false,
+//            showHeader: true,
+//      
+//            height: function($calendar) {
+//              return $(window).height() - $('h1').outerHeight(true);
+//            },
+//            eventRender: function(calEvent, $event) {
+//                $event.css('backgroundColor', 'coral');
+//                $event.find('.time').css({
+//                  backgroundColor: '#999',
+//                  border:'1px solid #888'
+//                });
+//            },
+//            eventNew: function(calEvent, $event) {
+//              displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+//              alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
+//            },
+//            eventDrop: function(calEvent, $event) {
+//              displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+//            },
+//            eventResize: function(calEvent, $event) {
+//              displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+//            },
+//            eventClick: function(calEvent, $event) {
+//              displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+//            },
+//            eventMouseover: function(calEvent, $event) {
+//              displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+//            },
+//            eventMouseout: function(calEvent, $event) {
+//              displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+//            },
+//            noEvents: function() {
+//              displayMessage('There are no events for this week');
+//            }
+//          });
+//      
+//          function displayMessage(message) {
+//            $('#message').html(message).fadeIn();
+//          }
+//      
+//          $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
+//        });
 //        function hi(){
 //          alert("hi");
 //        }
@@ -182,30 +182,7 @@
               displayMessage('There are no events for this week');
             }
           });
-          $(".all-events").click(function(){
-            // selected = "allEvents";
-            // localStorage.setItem("select",selected);
-            window.location.href = "{% url 'mainPage:weekview2' filter='all' %}";
-            
-           });
-           $(".my-events").click(function(){
-            // selected = "allEvents";
-            // localStorage.setItem("select",selected);
-            window.location.href = "{% url 'mainPage:weekview2' filter='myevents' %}";
-            
-           });
-           $(".ongoing-events").click(function(){
-            // selected = "allEvents";
-            // localStorage.setItem("select",selected);
-            window.location.href = "{% url 'mainPage:weekview2' filter='ongoing' %}";
-            
-           });
-           $(".friend-events").click(function(){
-            // selected = "allEvents";
-            // localStorage.setItem("select",selected);
-            window.location.href = "{% url 'mainPage:weekview2' filter='friends' %}";
-            
-           });
+          
         function displayMessage(message) {
             $('#message').html(message).fadeIn();
           }
@@ -245,6 +222,40 @@
 </div>
   <div id="calendar"></div>
   <script>start()</script>
+  <script>
+    var selected = null;
+    if(localStorage.getItem("select")=="allEvents"){
+      $(".all-events").addClass("active");
+    }else if(localStorage.getItem("select")=="myEvents"){
+      $(".my-events").addClass("active");
+    }else if(localStorage.getItem("select")=="friendEvents"){
+      $(".friend-events").addClass("active");
+    }else if(localStorage.getItem("select")=="onGoing"){
+      $(".ongoing-events").addClass("active");
+    }
+   $(".all-events").click(function(){
+      selected = "allEvents";
+      localStorage.setItem("select",selected);
+      window.location.href = "{% url 'mainPage:calendarpage' filter='all' %}";
+      
+    });
+    $(".my-events").click(function(){
+       selected = "myEvents";
+        localStorage.setItem("select",selected);
+        window.location.href = "{% url 'mainPage:calendarpage' filter='myevents' %}";  
+    });
+    $(".ongoing-events").click(function(){
+        selected = "onGoing";
+        localStorage.setItem("select",selected);
+        window.location.href = "{% url 'mainPage:calendarpage' filter='ongoing' %}";  
+    });
+
+    $(".friend-events").click(function(){
+      selected = "friendEvents";
+        localStorage.setItem("select",selected);
+        window.location.href = "{% url 'mainPage:calendarpage' filter='friends' %}";  
+  });
+  </script>
 <!--  <script>hi();</script>-->
 <!--  <script>alert("here2");</script>-->
 {% endblock %}
