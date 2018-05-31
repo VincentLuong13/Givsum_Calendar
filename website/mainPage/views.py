@@ -29,7 +29,8 @@ def schedulepage(request, filter = "all"):
         except:
             events = []
     elif filter =='ongoing':
-        events = Event.objects.all().exclude(repeat='None')
+        events = Event.objects.all().exclude(repeat='none')#fix this
+        
     elif filter == 'friends':
         events = Event.objects.none()
         try:
