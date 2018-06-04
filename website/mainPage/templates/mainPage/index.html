@@ -70,9 +70,18 @@
       $(".ongoing-events").addClass("active");
   }
 
-//add on going later
 
   $(document).ready(function(){
+    $(".next").click(function(){
+        window.location.href = "{% url 'mainPage:nextView' view=n_view year=n_year month=n_month day=n_day filter=n_filter %}";
+
+    });
+        $(".prev").click(function(){
+        window.location.href = "{% url 'mainPage:prevView' view=n_view year=n_year month=n_month day=n_day filter=n_filter%}";  
+    });
+    $(".today-button").click(function(){
+          window.location.href = "{% url 'mainPage:currentTime' view=n_view filter=n_filter %}";   
+    });
     $(".all-events").click(function(){
       selected = "allEvents";
       localStorage.setItem("select",selected);

@@ -19,7 +19,7 @@ cal_year = datetime.datetime.today().year
 cal_month  = datetime.datetime.today().month
 
 
-def schedulepage(request, filter = "all"):
+def schedulepage(request,year = datetime.datetime.today().year,month = datetime.datetime.today().month, day = datetime.datetime.today().day, filter = "all"):
     event_dict = defaultdict(list)
     if filter == 'all':
         events = Event.objects.all()
@@ -29,7 +29,7 @@ def schedulepage(request, filter = "all"):
         except:
             events = []
     elif filter =='ongoing':
-        events = Event.objects.all().exclude(repeat='none')#fix this
+        events = Event.objects.all().exclude(repeat='none')
         
     elif filter == 'friends':
         events = Event.objects.none()
@@ -41,12 +41,10 @@ def schedulepage(request, filter = "all"):
                     
         except:
             events = []
+    date = {'n_view': 'schedule', 'n_year': year, 'n_month': month, 'n_day': day,'n_filter':filter}
 
-    return scheduletemplate(request,events,event_dict)
-
-
-    return scheduletemplate(request,events,event_dict)
-def scheduletemplate(request,events,event_dict):
+    return scheduletemplate(request,events,event_dict,date)
+def scheduletemplate(request,events,event_dict,date):
     user = request.user.profile
     # dictionary key = dates, values = list of events
     for ev in sorted(events,key = lambda x: x.date_time):
@@ -56,7 +54,8 @@ def scheduletemplate(request,events,event_dict):
     month_template = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}
     
     insert_dict = {'ev_dict': dict(event_dict),'months': month_template}
-    insert_dict.update(get_calendar_variables())
+    insert_dict.update(get_calendar_variables(c_month = date['n_month'], c_year = date['n_year']))
+    insert_dict.update(date)
     return render(request,'mainPage/index.html',insert_dict)
 
 def calendarPage(request, filter = 'all'):
@@ -149,7 +148,14 @@ def nextView(request, view, year, month, day,filter):
         else:
             month += 1
         day = 1 #sets the day to 1 just to be sure that the date is a valid day
-    
+    if view == 'schedule': 
+        if month == 12: #makes sure that if the month is December, it will increment the year by 1 and set the month to January
+            month = 1
+            year += 1
+        else:
+            month += 1
+        day = 1 #sets the day to 1 just to be sure that the date is a valid day
+        return HttpResponseRedirect('/schedulepage/' + str(year) + '-' + str(month) + '-' + str(day) + '/filters=' +str(filter) + '/')
     if view == 'year':
         return HttpResponseRedirect('/calendarpage/year/' + str(year + 1) + '/filters='+str(filter) + '/')
     return HttpResponseRedirect('/' + str(view) + '/' + str(year) + '-' + str(month) + '-' + str(day) + '/filters=' +str(filter) + '/') #month/2018-06-12 -> month/2018/07/01
@@ -166,6 +172,14 @@ def prevView(request,view, year, month, day,filter):
         else:
             month -= 1
         day = 1 #makes sure that the day is a vali date
+    if view == 'schedule':
+        if month == 1:
+            month = 12
+            year -= 1
+        else:
+            month -= 1
+        day = 1 #sets the day to 1 just to be sure that the date is a valid day
+        return HttpResponseRedirect('/schedulepage/' + str(year) + '-' + str(month) + '-' + str(day) + '/filters=' +str(filter) + '/')
 
     if view == 'year':
         return HttpResponseRedirect('/calendarpage/year/' + str(year - 1) + '/filters='+str(filter) + '/')
@@ -176,11 +190,13 @@ def resetToCurrent(request,view,filter):
     '''
     This function redirects to the calendarpage to reset the date to view the current month/week/year
     '''
-    print(filter)
     if(view == 'month'):
         return HttpResponseRedirect('/calendarpage/filters=' + str(filter)+'/')
     elif(view == 'year'):
         return HttpResponseRedirect('/calendarpage/year/filters=' + str(filter)+'/')
+    elif(view == 'schedule'):
+        return HttpResponseRedirect('/schedulepage/filters=' + str(filter)+'/')
+        
     
 
 def yearview(request, year = datetime.datetime.today().year,filter = 'all'):
