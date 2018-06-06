@@ -74,7 +74,7 @@
                     {% for event in events %}
                         <!-- checking if event is in date -->
                         {% if event.date_time.day == forloop.parentloop.counter and event.date_time.month == cur_month and event.date_time.year == cur_year %}
-                        <div><span class="dot" style="background-color: pink"></span><a style="color: #777;" href="{{event.url}}">{{event.name}}</a></div>
+                        <div><span class="dot" style="background-color: pink"></span><a style="color: #777;" href="{{event.event_url}}">{{event.name}}</a></div>
                         {% endif %}
                     {% endfor %}
                 </div>
