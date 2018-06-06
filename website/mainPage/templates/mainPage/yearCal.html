@@ -82,14 +82,14 @@
                                         <td class="y-today" >
                                                 <div class="y-day" data-html="true" style="background-color:coral;"><a href="#" data-html="true" data-toggle="popover" data-trigger="focus" title="Today: {{month_info.cur_name_of_month}} {{forloop.counter}}, {{month_info.cur_year}}" data-content="
                                                     {% for event in event_info.0 %}
-                                                        {% if event.date_time.minute  == 0 %}
+                                                        <b>{% if event.date_time.minute  == 0 %}
                                                             {{event.date_time.hour}}:{{event.date_time.minute}}0
                                                         {%elif event.date_time.minute < 10 %}
                                                             {{event.date_time.hour}}:0{{event.date_time.minute}}
                                                         {% else %}
                                                             {{event.date_time.hour}}:{{event.date_time.minute}}
-                                                        {% endif %}                                                
-                                                    : {{event.name}}
+                                                        {% endif %}</b>                                                
+                                                     <a href='#' style='color: #777;'>{{event.name}}</a>
                                                     <br>
                                                     {% endfor %}
                                                     ">{{forloop.counter}}</a></div>
@@ -97,14 +97,14 @@
                                         <td class=" y-today y-heat" >
                                             <div class="y-day" data-html="true" style="background-color: {{event_info.2}} ;"><a href="#" data-html="true" data-toggle="popover" data-trigger="focus" title="{{month_info.cur_name_of_month}} {{forloop.counter}}, {{month_info.cur_year}}" data-content="
                                                 {% for event in event_info.0 %}
-                                                    {% if event.date_time.minute  == 0 %}
+                                                <b>{% if event.date_time.minute  == 0 %}
                                                         {{event.date_time.hour}}:{{event.date_time.minute}}0
                                                     {%elif event.date_time.minute < 10 %}
                                                         {{event.date_time.hour}}:0{{event.date_time.minute}}
                                                     {% else %}
                                                         {{event.date_time.hour}}:{{event.date_time.minute}}
-                                                    {% endif %}                                                
-                                                : {{event.name}}
+                                                    {% endif %}</b>                                                
+                                                 <a href='#' style='color: #777;'>{{event.name}}</a>
                                                 <br>
                                                 {% endfor %}
                                                 ">{{forloop.counter}}</a></div>
