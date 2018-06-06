@@ -3,7 +3,7 @@
     {% load static %}
 <!--    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/smoothness/jquery-ui.css">-->
     <link rel='stylesheet' type='text/css' href="{% static 'mainPage/jquery-week-calendar-master/libs/css/smoothness/jquery-ui-1.8.11.custom.css' %}" />
-    <link rel='stylesheet' type='text/css' href="{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.css' %}" />
+    <link rel='stylesheet' type='text/css' href="{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendars.css' %}" />
     <link rel='stylesheet' href = "{% static 'mainPage/weekPage.css' %}">
     <style type='text/css'>
         body {
@@ -68,7 +68,7 @@
     <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/libs/jquery-1.4.4.min.js' %}"></script>
     <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/libs/jquery-ui-1.8.11.custom.min.js' %}"></script>
     <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/libs/date.js' %}"></script>
-    <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendar.js' %}"></script>
+    <script type='text/javascript' src="{% static 'mainPage/jquery-week-calendar-master/jquery.weekcalendars.js' %}"></script>
 
     <script type='text/javascript'>
       
@@ -80,62 +80,7 @@
           ]
         };
       
-//        $(document).ready(function() {
-//          alert('here');
-//          $('#calendar').weekCalendar({
-//            data: eventData,
-//      
-//            timeslotsPerHour: 4,
-//            allowCalEventOverlap: true,
-//            overlapEventsSeparate: true,
-//            totalEventsWidthPercentInOneColumn : 95,
-//            readonly: true,
-//            businessHours: false,
-//            showHeader: true,
-//      
-//            height: function($calendar) {
-//              return $(window).height() - $('h1').outerHeight(true);
-//            },
-//            eventRender: function(calEvent, $event) {
-//                $event.css('backgroundColor', 'coral');
-//                $event.find('.time').css({
-//                  backgroundColor: '#999',
-//                  border:'1px solid #888'
-//                });
-//            },
-//            eventNew: function(calEvent, $event) {
-//              displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-//              alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
-//            },
-//            eventDrop: function(calEvent, $event) {
-//              displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-//            },
-//            eventResize: function(calEvent, $event) {
-//              displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-//            },
-//            eventClick: function(calEvent, $event) {
-//              displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-//            },
-//            eventMouseover: function(calEvent, $event) {
-//              displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-//            },
-//            eventMouseout: function(calEvent, $event) {
-//              displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-//            },
-//            noEvents: function() {
-//              displayMessage('There are no events for this week');
-//            }
-//          });
-//      
-//          function displayMessage(message) {
-//            $('#message').html(message).fadeIn();
-//          }
-//      
-//          $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
-//        });
-//        function hi(){
-//          alert("hi");
-//        }
+
       function start(){
 //        alert("here3");
         $('#calendar').weekCalendar({
@@ -180,6 +125,7 @@
             },
             noEvents: function() {
               displayMessage('There are no events for this week');
+              
             }
           });
           
@@ -210,19 +156,28 @@
       WEEK
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="/calendarpage/week/">WEEK</a>
-      <a class="dropdown-item active" href="#">MONTH</a>
+      <a class="dropdown-item active" href="/calendarpage/week/">WEEK</a>
+      <a class="dropdown-item " href="/calendarpage/filters={{n_filter}}/">MONTH</a>
       <a class="dropdown-item" href="/calendarpage/year/filters={{n_filter}}/">YEAR</a>
   </div>
   </div>
   <!-- end drop down menu -->     
   <!-- arrows -->        
-  <span class="prev"><a href="#">&#10094;</a></span>
-  <span class="next"><a href="#">&#10095;</a></span>
+  <span class="prev"onclick="prev()"><a href="#">&#10094;</a></span>
+  <span class="next" onclick="next()"><a href="#" >&#10095;</a></span>
 </div>
   <div id="calendar"></div>
   <script>start()</script>
   <script>
+    
+    function next(){
+        const b = $('.ui-icon-seek-next');
+        b.click();
+    }
+    function prev(){
+        const c = $('.ui-icon-seek-prev');
+        c.click();
+    }
     var selected = null;
     if(localStorage.getItem("select")=="allEvents"){
       $(".all-events").addClass("active");
@@ -255,8 +210,11 @@
              selected = "friendEvents";
              localStorage.setItem("select",selected);
             window.location.href = "{% url 'mainPage:weekview2' filter='friends' %}";
-            
            });
+           $(".today-button").click(function(){
+              const a = $('.ui-icon-home');
+              a.click();
+          });
   </script>
 <!--  <script>hi();</script>-->
 <!--  <script>alert("here2");</script>-->

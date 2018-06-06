@@ -731,6 +731,7 @@
                 text: false,
                 icons: {primary: 'ui-icon-seek-next'}})
               .click(function() {
+                  
                   self.element.weekCalendar('next');
                   return false;
                 });
